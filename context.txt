@@ -1,0 +1,112 @@
+# FindMe: School Lost and Found System - Project Status
+
+## Current Project State
+
+### Frontend (React)
+- Created using create-react-app
+- Basic folder structure set up:
+  ```
+  src/
+    ├── components/
+    ├── pages/
+    ├── utils/
+    ├── assets/
+    ├── services/
+    └── context/
+  ```
+- Implemented components:
+  - Navbar (with basic navigation)
+  - Login page (with form and state management)
+  - Registration page (with form and state management)
+- Using Material-UI for components
+- Basic routing implemented
+
+### Backend (Node.js/Express)
+- Basic Express server setup
+- Folder structure created:
+  ```
+  backend/
+    ├── src/
+    │   ├── routes/
+    │   ├── controllers/
+    │   ├── models/
+    │   ├── middleware/
+    │   ├── config/
+    │   └── index.js
+    ├── package.json
+    └── .env
+  ```
+- Authentication routes and controllers implemented
+- MySQL database connection configured
+- Basic user table created
+
+### Database (MySQL)
+- Database created: `findme_db`
+- Users table created with fields:
+  - id
+  - university_id
+  - email
+  - password
+  - first_name
+  - last_name
+  - role
+  - mobile_number
+  - created_at
+
+## Dependencies Installed
+
+### Frontend
+- react-router-dom
+- axios
+- @mui/material
+- @mui/icons-material
+- @emotion/react
+- @emotion/styled
+
+### Backend
+- express
+- mysql2
+- cors
+- dotenv
+- bcryptjs
+- jsonwebtoken
+- nodemon (dev dependency)
+
+## Environment Setup
+- `.env` file configured with:
+  ```
+  PORT=5000
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=your_mysql_password
+  DB_NAME=findme_db
+  JWT_SECRET=your_jwt_secret_key
+  ```
+
+## Next Steps
+1. Test the authentication endpoints using Postman
+2. Connect frontend to backend:
+   - Create API service in frontend
+   - Implement authentication context
+   - Add form submission handling
+3. Implement protected routes
+4. Create dashboard layout
+5. Implement item reporting functionality
+
+## API Endpoints (Currently Available)
+- POST `/api/auth/register` - User registration
+- POST `/api/auth/login` - User login
+
+## Important Files
+All source files and configurations have been created up to implementing the authentication endpoints.
+
+## Notes
+- The project uses Material-UI for styling
+- Authentication uses JWT tokens
+- Database is set up using MySQL Workbench
+- Backend runs on port 5000, frontend on port 3000
+
+## To Start Development
+1. Frontend: `npm start` in project root
+2. Backend: `npm run dev` in backend directory
+3. Ensure MySQL is running with the correct database created
