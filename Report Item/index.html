@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Item</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <a href="#" class="back-link">← Back to Dashboard</a>
+        <h2>Report an Item</h2>
+        <div class="toggle-buttons">
+            <button id="lost-item-btn" class="active">Report Lost Item</button>
+            <button id="found-item-btn">Report Found Item</button>
+        </div>
+
+        <form id="report-form">
+            <label for="category">Item Category<span>*</span></label>
+            <select id="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Books">Books</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="description">Item Description<span>*</span></label>
+            <input type="text" id="description" placeholder="Provide a detailed description..." required></textarea>
+
+            <label for="date">Date Lost<span>*</span></label>
+            <input type="date" id="date" required>
+
+            <label for="location">Location<span>*</span></label>
+            <input type="text" id="location" placeholder="Specify location on campus..." required>
+
+            <label for="photo">Upload Photo (Optional)</label>
+            <input type="file" id="photo" accept="image/*">
+
+            <label for="contact">Contact Number (Optional)</label>
+            <input type="tel" id="contact" placeholder="Enter your contact number">
+
+            <label for="notes">Additional Notes (Optional)</label>
+            <input type="text" id="notes" placeholder="Additional information..."></textarea>
+
+            <div class="form-buttons">
+                <button type="button" id="cancel">Cancel</button>
+                <button type="submit" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
