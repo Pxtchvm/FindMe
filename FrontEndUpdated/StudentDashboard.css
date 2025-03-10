@@ -1,0 +1,209 @@
+/* src/Pages/StudentDashboard.css */
+
+.dashboard-container {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  background-color: #e0e0e0;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.header-left span {
+  color: #666;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
+.header-right button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  padding: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.report-lost-btn {
+  background-color: #4285f4;
+  color: white;
+}
+
+.report-found-btn {
+  background-color: #34a853;
+  color: white;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  padding: 8px;
+  outline: none;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.recent-items {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 40px; /* Increase margin */
+  padding: 20px; /* Add padding */
+  
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  padding: 40px; /* Increase padding */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px; /* Increase margin */
+  cursor: pointer;
+}
+
+.item-image {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height to match the width */
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure images fit in the container */
+}
+
+.item-details h3 {
+  margin: 0;
+  font-size: 1em;
+}
+
+
+.item-card {
+  display: flex; /* Use flexbox for layout */
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  align-items: center; /* Align items vertically in the center */
+}
+
+.item-image {
+  width: 80px; /* Adjust image width as needed */
+  height: 60px; /* Adjust image height as needed */
+  margin-right: 10px; /* Add some space between image and details */
+  overflow: hidden; /* Prevent images from overflowing their container */
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+
+.item-details p {
+  color: #666;
+  font-size: 0.9em;
+  margin: 5px 0;
+}
+
+.view-details-btn {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item-status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.claimed {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.pending {
+  background-color: #fff3e0;
+  color: #ff9800;
+}
+
+.unclaimed {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.header-right .profile-btn {
+    /* ... other button styles ... */
+    font-size: 1.2em; /* Slightly smaller logout button */
+    margin-right: 20px; /* Add space to the right of the logout button */
+  }
+  
+  .icons-wrapper { /* Style the icons wrapper */
+    display: flex;
+    align-items: center;
+  }
+  
+  .icons-wrapper > * { /* Add space between the icons */
+    margin-left: 10px; 
+  }
+  
+  .profile-icon { /* Style the human icon button */
+    background: none;
+    border: none;
+    font-size: 1.5em; /* Match the bell icon size */
+    cursor: pointer;
+  }
