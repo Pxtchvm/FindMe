@@ -1,5 +1,7 @@
-const User = require('../models/user.model');
-const jwt = require('jsonwebtoken');
+const db = require("../config/db.config");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
 const { validationResult } = require('express-validator');
 
 // Register a new user
@@ -22,11 +24,11 @@ exports.register = async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Create new user
+        // Create new user with the User model
         const newUser = new User({
             universityId,
             email,
-            password,
+            password, // Will be hashed by the pre-save hook in the model
             firstName,
             lastName,
             role,
@@ -38,7 +40,7 @@ exports.register = async (req, res) => {
 
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        console.error(error);
+        console.error('Registration error:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -54,19 +56,26 @@ exports.login = async (req, res) => {
     try {
         const { universityId, password } = req.body;
 
-        // Find user
+        // Find user - add some debug logging
+        console.log(`Login attempt for universityId: ${universityId}`);
         const user = await User.findOne({ universityId });
 
         if (!user) {
+            console.log('User not found');
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Check password
+        console.log('User found, checking password');
+
+        // Check password using the model method
         const isMatch = await user.comparePassword(password);
 
         if (!isMatch) {
+            console.log('Password does not match');
             return res.status(401).json({ message: 'Invalid credentials' });
         }
+
+        console.log('Password match successful, generating token');
 
         // Generate JWT token
         const token = jwt.sign(
@@ -87,7 +96,7 @@ exports.login = async (req, res) => {
             }
         });
     } catch (error) {
-        console.error(error);
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Server error' });
     }
 };

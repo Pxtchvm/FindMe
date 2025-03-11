@@ -1,36 +1,41 @@
 /**
- * MongoDB Seed Script for FindMe App
+ * Complete Seed Script for FindMe App
  * 
- * This script populates the database with sample data for testing and development.
- * Run with: node seed.js
+ * This script creates users with correct password hashing,
+ * and also creates sample items and notifications.
+ * Run with: node complete-seed.js
  */
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-// Import models
-const User = require('./models/user.model');
-const Item = require('./models/item.model');
-const Notification = require('./models/notification.model');
-
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-    .then(() => console.log('MongoDB connected for seeding'))
+    .then(() => console.log('MongoDB connected for complete seeding'))
     .catch(err => {
         console.error('MongoDB connection error:', err);
         process.exit(1);
     });
 
-// Sample data
+// Import models
+const User = require('./models/user.model');
+const Item = require('./models/item.model');
+const Notification = require('./models/notification.model');
+
+// Sample data with fixed password
+const COMMON_PASSWORD = 'password123';
+const HASHED_PASSWORD = bcrypt.hashSync(COMMON_PASSWORD, 10);
+
+// Sample users with pre-hashed passwords
 const sampleUsers = [
     {
         universityId: 'admin123',
         email: 'admin@example.com',
-        password: 'password123',
+        password: HASHED_PASSWORD,
         firstName: 'Admin',
         lastName: 'User',
         role: 'admin',
@@ -39,7 +44,7 @@ const sampleUsers = [
     {
         universityId: 'student001',
         email: 'student@example.com',
-        password: 'password123',
+        password: HASHED_PASSWORD,
         firstName: 'John',
         lastName: 'Doe',
         role: 'student',
@@ -48,7 +53,7 @@ const sampleUsers = [
     {
         universityId: 'staff001',
         email: 'staff@example.com',
-        password: 'password123',
+        password: HASHED_PASSWORD,
         firstName: 'Jane',
         lastName: 'Smith',
         role: 'staff',
@@ -75,26 +80,23 @@ const clearDatabase = async () => {
     }
 };
 
-// Seed users
+// Seed users directly (bypass pre-save hook)
 const seedUsers = async () => {
     try {
-        const createdUsers = [];
+        console.log('Creating users with fixed password hash...');
 
-        for (const user of sampleUsers) {
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(user.password, salt);
+        // Insert users directly to avoid model pre-save hook
+        const result = await User.insertMany(sampleUsers);
 
-            const newUser = new User({
-                ...user,
-                password: hashedPassword
-            });
+        console.log(`Created ${result.length} users with password: ${COMMON_PASSWORD}`);
 
-            const savedUser = await newUser.save();
-            createdUsers.push(savedUser);
-        }
+        // Double-check - verify we can retrieve them
+        const users = await User.find();
+        users.forEach(user => {
+            console.log(`- ${user.role}: ${user.universityId} (${user.firstName} ${user.lastName})`);
+        });
 
-        console.log(`${createdUsers.length} users created`);
-        return createdUsers;
+        return users;
     } catch (error) {
         console.error('Error seeding users:', error);
         process.exit(1);
@@ -206,22 +208,45 @@ const seedNotifications = async (users, items) => {
     }
 };
 
-// Run seeding
-const runSeeding = async () => {
+// Test password verification
+const testPasswordVerification = async () => {
+    try {
+        console.log('\nTesting password verification...');
+
+        for (const sampleUser of sampleUsers) {
+            const user = await User.findOne({ universityId: sampleUser.universityId });
+
+            // Test with correct password
+            const isValid = await bcrypt.compare(COMMON_PASSWORD, user.password);
+            console.log(`${user.universityId}: Password verification ${isValid ? 'SUCCEEDED' : 'FAILED'}`);
+        }
+    } catch (error) {
+        console.error('Error testing password verification:', error);
+    }
+};
+
+// Run the complete seeding
+const runCompleteSeeding = async () => {
     try {
         await clearDatabase();
         const users = await seedUsers();
         const items = await seedItems(users);
         await seedNotifications(users, items);
+        await testPasswordVerification();
 
-        console.log('Database seeding completed successfully');
+        console.log('\nComplete seeding finished successfully!');
+        console.log(`You can now log in with any of the following users (password: ${COMMON_PASSWORD}):`);
+        console.log('- Admin:    admin123');
+        console.log('- Student:  student001');
+        console.log('- Staff:    staff001');
+
         mongoose.connection.close();
     } catch (error) {
-        console.error('Database seeding failed:', error);
+        console.error('Complete seeding failed:', error);
         mongoose.connection.close();
         process.exit(1);
     }
 };
 
-// Execute seeding
-runSeeding();
+// Execute the complete seeding
+runCompleteSeeding();
