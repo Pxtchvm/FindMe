@@ -9,14 +9,18 @@
         "install-client": "cd client && npm install",
         "install-server": "cd server && npm install",
         "install-all": "npm install && npm run install-client && npm run install-server",
-        "build-client": "cd client && npm run build"
+        "build-client": "cd client && npm run build",
+        "setup-dirs": "node create-directories.js"
     },
     "keywords": [
         "lost and found",
         "school",
-        "management system"
+        "management system",
+        "web app",
+        "findme",
+        "mapua university"
     ],
-    "author": "",
+    "author": "Group 2 - FindMe Team",
     "license": "MIT",
     "devDependencies": {
         "concurrently": "^7.0.0"
