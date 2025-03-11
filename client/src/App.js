@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import { ItemProvider } from './context/ItemContext';
+import { NotificationProvider } from './context/NotificationContext';
 import Navbar from './components/layout/Navbar';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -34,21 +36,25 @@ function App() {
     }, [checkAuth]);
 
     return (
-        <div className="app-container">
-            <Navbar />
-            <Container sx={{ mt: 4, mb: 4 }}>
-                <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
-                    <Route path="/report-item" element={<PrivateRoute element={<ReportItem />} />} />
-                    <Route path="/items/:id" element={<PrivateRoute element={<ItemDetails />} />} />
-                    <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
-                    <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
-                    {/* Add more routes as needed */}
-                </Routes>
-            </Container>
-        </div>
+        <ItemProvider>
+            <NotificationProvider>
+                <div className="app-container">
+                    <Navbar />
+                    <Container sx={{ mt: 4, mb: 4 }}>
+                        <Routes>
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="/register" element={<RegisterPage />} />
+                            <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
+                            <Route path="/report-item" element={<PrivateRoute element={<ReportItem />} />} />
+                            <Route path="/items/:id" element={<PrivateRoute element={<ItemDetails />} />} />
+                            <Route path="/notifications" element={<PrivateRoute element={<Notifications />} />} />
+                            <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+                            {/* Add more routes as needed */}
+                        </Routes>
+                    </Container>
+                </div>
+            </NotificationProvider>
+        </ItemProvider>
     );
 }
 
