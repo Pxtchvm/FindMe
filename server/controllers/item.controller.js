@@ -269,6 +269,15 @@ exports.processClaim = async (req, res) => {
         .json({ message: "This item is not pending approval" });
     }
 
+    // Store the claimant's ID before potentially clearing it
+    const claimantId = item.claimedBy;
+
+    if (!claimantId) {
+      return res
+        .status(400)
+        .json({ message: "No claimant found for this item" });
+    }
+
     // Update item status based on decision
     item.status = approve ? "claimed" : "available";
 
@@ -279,9 +288,9 @@ exports.processClaim = async (req, res) => {
 
     await item.save();
 
-    // Create notification for the claimant
+    // Create notification for the claimant using the stored ID
     const newNotification = new Notification({
-      user: item.claimedBy,
+      user: claimantId,  // Using stored ID instead of item.claimedBy
       type: approve ? "success" : "warning",
       title: approve ? "Claim Approved" : "Claim Rejected",
       message: approve
