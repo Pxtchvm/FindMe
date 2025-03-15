@@ -72,19 +72,23 @@ npm run dev
 
 ### Login Page
 
-![Login Page](https://via.placeholder.com/600x300?text=Login+Page)
+![Login Page](https://i.imgur.com/xsDncnA.png)
+
+### Register Page
+
+![Register Page](https://i.imgur.com/lqnBHWN.png)
 
 ### Dashboard
 
-![Dashboard](https://via.placeholder.com/600x300?text=Dashboard)
+![Dashboard](https://i.ibb.co/rKf7B5ff/Screenshot-2025-03-15-at-12-12-12-Find-Me-Lost-and-Found-System.png)
 
 ### Report Item Form
 
-![Report Item](https://via.placeholder.com/600x300?text=Report+Item+Form)
+![Report Item](https://i.ibb.co/Fq5QCnLp/report-item.png)
 
 ### Item Details
 
-![Item Details](https://via.placeholder.com/600x300?text=Item+Details)
+![Item Details](https://i.ibb.co/nqq1rJtp/item-details.png)
 
 ## 📊 Project Structure
 
