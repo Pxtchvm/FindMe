@@ -20,7 +20,8 @@ mongoose.connect(process.env.MONGODB_URI, {
         console.error('MongoDB connection error:', err);
         process.exit(1);
     });
-
+mongoose.set('strictQuery', false);  // Or true, depending on your preference
+    
 // Import models
 const User = require('./models/user.model');
 const Item = require('./models/item.model');
@@ -108,52 +109,54 @@ const seedItems = async (users) => {
     try {
         // Create sample items data with user references
         sampleItems = [
-            {
-                category: 'Electronics',
-                description: 'Black HP laptop with blue case',
-                date: new Date('2025-02-15'),
-                location: 'Library, 2nd Floor',
-                status: 'available',
-                type: 'found',
-                reportedBy: users[1]._id, // Student user
-                photoUrl: 'https://example.com/laptop.jpg',
-                contactInfo: users[1].mobileNumber,
-                notes: 'Found on a study table near the window'
-            },
-            {
-                category: 'IDs',
-                description: 'University ID Card',
-                date: new Date('2025-02-20'),
-                location: 'Cafeteria',
-                status: 'available',
-                type: 'lost',
-                reportedBy: users[2]._id, // Staff user
-                contactInfo: users[2].mobileNumber,
-                notes: 'Lost during lunch hour'
-            },
-            {
-                category: 'Accessories',
-                description: 'Blue backpack with math textbooks inside',
-                date: new Date('2025-02-10'),
-                location: 'Room 101, Building A',
-                status: 'claimed',
-                type: 'found',
-                reportedBy: users[2]._id, // Staff user
-                claimedBy: users[1]._id, // Student user
-                photoUrl: 'https://example.com/backpack.jpg',
-                contactInfo: users[2].mobileNumber
-            },
-            {
-                category: 'Books',
-                description: 'Calculus textbook',
-                date: new Date('2025-02-25'),
-                location: 'Math Department',
-                status: 'pending',
-                type: 'lost',
-                reportedBy: users[1]._id, // Student user
-                claimedBy: users[2]._id, // Staff user
-                contactInfo: users[1].email
-            }
+          {
+            category: "Electronics",
+            description: "Black HP laptop with blue case",
+            date: new Date("2025-02-15"),
+            location: "Library, 2nd Floor",
+            status: "available",
+            type: "found",
+            reportedBy: users[1]._id, // Student user
+            photoUrl:
+              "https://images.unsplash.com/photo-1597673030062-0a0f1a801a31?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            contactInfo: users[1].mobileNumber,
+            notes: "Found on a study table near the window",
+          },
+          {
+            category: "IDs",
+            description: "University ID Card",
+            date: new Date("2025-02-20"),
+            location: "Cafeteria",
+            status: "available",
+            type: "lost",
+            reportedBy: users[2]._id, // Staff user
+            contactInfo: users[2].mobileNumber,
+            notes: "Lost during lunch hour",
+          },
+          {
+            category: "Accessories",
+            description: "Blue backpack with math textbooks inside",
+            date: new Date("2025-02-10"),
+            location: "Room 101, Building A",
+            status: "claimed",
+            type: "found",
+            reportedBy: users[2]._id, // Staff user
+            claimedBy: users[1]._id, // Student user
+            photoUrl:
+              "https://st2.depositphotos.com/4431055/11351/i/450/depositphotos_113513424-School-Backpack-on-background.jpg",
+            contactInfo: users[2].mobileNumber,
+          },
+          {
+            category: "Books",
+            description: "Calculus textbook",
+            date: new Date("2025-02-25"),
+            location: "Math Department",
+            status: "pending",
+            type: "lost",
+            reportedBy: users[1]._id, // Student user
+            claimedBy: users[2]._id, // Staff user
+            contactInfo: users[1].email,
+          },
         ];
 
         const createdItems = await Item.insertMany(sampleItems);
