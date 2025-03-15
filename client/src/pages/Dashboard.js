@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useItems } from "../context/ItemContext";
@@ -36,8 +36,8 @@ const Dashboard = () => {
     status: "",
   });
 
+  // Fetch items on component mount
   useEffect(() => {
-    // Load items based on the active tab
     if (activeTab === 0) {
       getAllItems();
     } else {
@@ -49,27 +49,38 @@ const Dashboard = () => {
     setActiveTab(newValue);
   };
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
+    console.log("Searching with term:", searchTerm);
+    console.log("Current filters:", filters);
     getAllItems({ ...filters, search: searchTerm });
-  };
+  }, [getAllItems, filters, searchTerm]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters({
-      ...filters,
+    console.log(`Filter changed: ${name} = ${value}`);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
       [name]: value,
-    });
+    }));
   };
 
-  const handleResetFilters = () => {
+  const handleApplyFilters = useCallback(() => {
+    console.log("Applying filters:", filters);
+    console.log("With search term:", searchTerm);
+    getAllItems({ ...filters, search: searchTerm });
+  }, [getAllItems, filters, searchTerm]);
+
+  const handleResetFilters = useCallback(() => {
+    console.log("Resetting filters");
     setFilters({
       type: "",
       category: "",
       status: "",
     });
     setSearchTerm("");
-    getAllItems();
-  };
+    // Call getAllItems with empty filter object
+    getAllItems({});
+  }, [getAllItems]);
 
   return (
     <Box>
@@ -234,10 +245,7 @@ const Dashboard = () => {
 
                 <Grid item xs={12} sm={3}>
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Button
-                      variant="contained"
-                      onClick={() => getAllItems(filters)}
-                    >
+                    <Button variant="contained" onClick={handleApplyFilters}>
                       Apply Filters
                     </Button>
                     <Button variant="outlined" onClick={handleResetFilters}>
@@ -265,7 +273,14 @@ const Dashboard = () => {
                     <Chip
                       label={`Type: ${filters.type}`}
                       size="small"
-                      onDelete={() => setFilters({ ...filters, type: "" })}
+                      onDelete={() => {
+                        setFilters((prev) => ({ ...prev, type: "" }));
+                        getAllItems({
+                          ...filters,
+                          type: "",
+                          search: searchTerm,
+                        });
+                      }}
                     />
                   )}
 
@@ -273,7 +288,14 @@ const Dashboard = () => {
                     <Chip
                       label={`Category: ${filters.category}`}
                       size="small"
-                      onDelete={() => setFilters({ ...filters, category: "" })}
+                      onDelete={() => {
+                        setFilters((prev) => ({ ...prev, category: "" }));
+                        getAllItems({
+                          ...filters,
+                          category: "",
+                          search: searchTerm,
+                        });
+                      }}
                     />
                   )}
 
@@ -281,7 +303,14 @@ const Dashboard = () => {
                     <Chip
                       label={`Status: ${filters.status}`}
                       size="small"
-                      onDelete={() => setFilters({ ...filters, status: "" })}
+                      onDelete={() => {
+                        setFilters((prev) => ({ ...prev, status: "" }));
+                        getAllItems({
+                          ...filters,
+                          status: "",
+                          search: searchTerm,
+                        });
+                      }}
                     />
                   )}
 
@@ -289,7 +318,10 @@ const Dashboard = () => {
                     <Chip
                       label={`Search: ${searchTerm}`}
                       size="small"
-                      onDelete={() => setSearchTerm("")}
+                      onDelete={() => {
+                        setSearchTerm("");
+                        getAllItems({ ...filters, search: "" });
+                      }}
                     />
                   )}
                 </Box>

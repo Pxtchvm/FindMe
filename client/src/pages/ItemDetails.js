@@ -84,7 +84,7 @@ const ItemDetails = () => {
   }, [fetchItemData]);
 
   // Default image for items without photos
-  const DEFAULT_IMAGE = "https://via.placeholder.com/400x300?text=No+Image";
+  const DEFAULT_IMAGE = "https://placehold.co/400x300?text=No+Image";
 
   // Format date
   const formatDate = (dateString) => {

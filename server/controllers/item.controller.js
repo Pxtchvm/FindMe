@@ -49,6 +49,8 @@ exports.createItem = async (req, res) => {
 exports.getAllItems = async (req, res) => {
   try {
     const { type, category, status, search } = req.query;
+    console.log("Filter query received:", { type, category, status, search }); // Debug log
+
     const query = {};
 
     // Apply filters if provided
@@ -56,18 +58,27 @@ exports.getAllItems = async (req, res) => {
     if (category) query.category = category;
     if (status) query.status = status;
 
-    // Apply text search if provided
+    // Apply text search if provided - fix the search functionality
     if (search) {
-      query.$text = { $search: search };
+      // Use regex for more flexible searching (case-insensitive)
+      query.$or = [
+        { description: { $regex: search, $options: "i" } },
+        { category: { $regex: search, $options: "i" } },
+        { location: { $regex: search, $options: "i" } },
+      ];
     }
+
+    console.log("MongoDB query:", JSON.stringify(query)); // Debug log
 
     const items = await Item.find(query)
       .populate("reportedBy", "firstName lastName universityId")
       .sort({ createdAt: -1 });
 
+    console.log(`Found ${items.length} items matching query`); // Debug log
+
     res.json(items);
   } catch (error) {
-    console.error(error);
+    console.error("Error in getAllItems:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -217,7 +228,9 @@ exports.claimItem = async (req, res) => {
       user: item.reportedBy,
       type: "info",
       title: "Item Claim Request",
-      message: `Someone has requested to claim your ${item.type === "lost" ? "found" : "lost"} item: ${item.description}.`,
+      message: `Someone has requested to claim your ${
+        item.type === "lost" ? "found" : "lost"
+      } item: ${item.description}.`,
       relatedItem: item._id,
     });
 
