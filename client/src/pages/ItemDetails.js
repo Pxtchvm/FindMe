@@ -135,18 +135,35 @@ const ItemDetails = () => {
     );
   }
 
-  // Check if user is the owner
-  const isOwner = item && user && item.reportedBy._id === user.id;
-
-  // Check if user can claim (not owner, item available, and not already claimed)
-  const canClaim =
+  // Improved check for item ownership that handles different data structures
+  const isOwner =
     item &&
     user &&
-    item.reportedBy._id !== user.id &&
-    item.status === "available";
+    // If reportedBy is a populated object with _id
+    ((item.reportedBy._id && item.reportedBy._id.toString() === user.id) ||
+      // If reportedBy is just the ID string
+      (typeof item.reportedBy === "string" && item.reportedBy === user.id) ||
+      // If reportedBy is an ObjectId directly
+      (item.reportedBy.toString && item.reportedBy.toString() === user.id));
+
+  // Check if user can claim (not owner, item available, and not already claimed)
+  const canClaim = item && user && !isOwner && item.status === "available";
 
   // Check if user can process a claim
   const canProcessClaim = item && isOwner && item.status === "pending";
+
+  // For debugging - add this near the top of your returned JSX
+  console.log({
+    itemId: id,
+    reportedBy: item.reportedBy,
+    reportedById: item.reportedBy._id
+      ? item.reportedBy._id.toString()
+      : item.reportedBy,
+    userId: user.id,
+    isOwner,
+    itemStatus: item.status,
+    canProcessClaim,
+  });
 
   // Handle item deletion
   const handleDelete = async () => {
@@ -185,7 +202,7 @@ const ItemDetails = () => {
     try {
       await processClaim(id, approve);
       setSuccess(
-        approve ? "Claim approved successfully" : "Claim rejected successfully",
+        approve ? "Claim approved successfully" : "Claim rejected successfully"
       );
       setProcessDialogOpen(false);
       // Update local item state
@@ -254,8 +271,8 @@ const ItemDetails = () => {
                     item.status === "available"
                       ? "success"
                       : item.status === "claimed"
-                        ? "secondary"
-                        : "warning"
+                      ? "secondary"
+                      : "warning"
                   }
                   size="small"
                 />
