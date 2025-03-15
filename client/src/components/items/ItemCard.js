@@ -17,7 +17,7 @@ import {
 } from '@mui/icons-material';
 
 // Default image for items without photos
-const DEFAULT_IMAGE = 'https://via.placeholder.com/150?text=No+Image';
+const DEFAULT_IMAGE = 'https://placehold.co/150?text=No+Image';
 
 const ItemCard = ({ item }) => {
     const navigate = useNavigate();
