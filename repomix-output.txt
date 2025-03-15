@@ -58,6 +58,7 @@ client/src/components/notifications/NotificationItem.js
 client/src/context/AuthContext.js
 client/src/context/ItemContext.js
 client/src/context/NotificationContext.js
+client/src/context/ThemeContext.js
 client/src/index.css
 client/src/index.js
 client/src/pages/Dashboard.js
@@ -308,6 +309,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import { ItemProvider } from "./context/ItemContext";
 import { NotificationProvider } from "./context/NotificationContext";
+import { ThemeProvider as CustomThemeProvider } from "./context/ThemeContext";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+import { useTheme } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -317,6 +325,36 @@ import ItemDetails from "./pages/ItemDetails";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
 import { Container, CircularProgress, Box } from "@mui/material";
+
+// Theme Component that uses the context and applies the MUI theme
+const ThemedApp = ({ children }) => {
+  const { darkMode } = useTheme();
+
+  // Create theme based on dark mode setting
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+      primary: {
+        main: "#1976d2",
+      },
+      secondary: {
+        main: "#dc004e",
+      },
+      background: {
+        default: darkMode ? "#121212" : "#f0f0f0",
+        paper: darkMode ? "#1e1e1e" : "#ffffff",
+      },
+    },
+    // Additional theme customizations can be added here
+  });
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  );
+};
 
 // Private Route Component
 const PrivateRoute = ({ element }) => {
@@ -348,40 +386,44 @@ function App() {
   }, [checkAuth]);
 
   return (
-    <ItemProvider>
-      <NotificationProvider>
-        <div className="app-container">
-          <Navbar />
-          <Container sx={{ mt: 4, mb: 4 }}>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route
-                path="/"
-                element={<PrivateRoute element={<Dashboard />} />}
-              />
-              <Route
-                path="/report-item"
-                element={<PrivateRoute element={<ReportItem />} />}
-              />
-              <Route
-                path="/items/:id"
-                element={<PrivateRoute element={<ItemDetails />} />}
-              />
-              <Route
-                path="/notifications"
-                element={<PrivateRoute element={<Notifications />} />}
-              />
-              <Route
-                path="/profile"
-                element={<PrivateRoute element={<Profile />} />}
-              />
-              {/* Add more routes as needed */}
-            </Routes>
-          </Container>
-        </div>
-      </NotificationProvider>
-    </ItemProvider>
+    <CustomThemeProvider>
+      <ItemProvider>
+        <NotificationProvider>
+          <ThemedApp>
+            <div className="app-container">
+              <Navbar />
+              <Container sx={{ mt: 4, mb: 4 }}>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  <Route
+                    path="/"
+                    element={<PrivateRoute element={<Dashboard />} />}
+                  />
+                  <Route
+                    path="/report-item"
+                    element={<PrivateRoute element={<ReportItem />} />}
+                  />
+                  <Route
+                    path="/items/:id"
+                    element={<PrivateRoute element={<ItemDetails />} />}
+                  />
+                  <Route
+                    path="/notifications"
+                    element={<PrivateRoute element={<Notifications />} />}
+                  />
+                  <Route
+                    path="/profile"
+                    element={<PrivateRoute element={<Profile />} />}
+                  />
+                  {/* Add more routes as needed */}
+                </Routes>
+              </Container>
+            </div>
+          </ThemedApp>
+        </NotificationProvider>
+      </ItemProvider>
+    </CustomThemeProvider>
   );
 }
 
@@ -582,6 +624,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotifications } from "../../context/NotificationContext";
+import { useTheme } from "../../context/ThemeContext";
 import {
   AppBar,
   Toolbar,
@@ -593,17 +636,24 @@ import {
   MenuItem,
   Avatar,
   Box,
+  Switch,
+  Tooltip,
+  useTheme as useMuiTheme,
 } from "@mui/material";
 import {
   Notifications as NotificationsIcon,
   AccountCircle,
   ExitToApp,
   Add as AddIcon,
+  DarkMode as DarkModeIcon,
+  LightMode as LightModeIcon,
 } from "@mui/icons-material";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { unreadCount, getNotifications } = useNotifications();
+  const { darkMode, toggleDarkMode } = useTheme();
+  const muiTheme = useMuiTheme();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -634,7 +684,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Toolbar>
         <Typography
           variant="h6"
@@ -649,6 +699,26 @@ const Navbar = () => {
         >
           Find<span style={{ color: "#ff9800" }}>Me</span>
         </Typography>
+
+        {/* Dark Mode Toggle */}
+        <Tooltip
+          title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", mr: 2 }}>
+            <LightModeIcon
+              sx={{ color: darkMode ? "gray" : "inherit", mr: 0.5 }}
+            />
+            <Switch
+              checked={darkMode}
+              onChange={toggleDarkMode}
+              color="default"
+              size="small"
+            />
+            <DarkModeIcon
+              sx={{ color: darkMode ? "inherit" : "gray", ml: 0.5 }}
+            />
+          </Box>
+        </Tooltip>
 
         {user ? (
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -782,6 +852,24 @@ const NotificationItem = ({ notification }) => {
     markAsRead(notification._id);
   };
 
+  // Extract the item ID correctly whether relatedItem is populated or not
+  const getItemId = () => {
+    if (!notification.relatedItem) return null;
+
+    // If relatedItem is already populated (it's an object with _id)
+    if (
+      typeof notification.relatedItem === "object" &&
+      notification.relatedItem._id
+    ) {
+      return notification.relatedItem._id;
+    }
+
+    // If relatedItem is just the ID string
+    return notification.relatedItem;
+  };
+
+  const itemId = getItemId();
+
   return (
     <>
       <ListItem
@@ -806,12 +894,8 @@ const NotificationItem = ({ notification }) => {
         }}
       >
         <ListItemButton
-          component={notification.relatedItem ? Link : undefined}
-          to={
-            notification.relatedItem
-              ? `/items/${notification.relatedItem}`
-              : undefined
-          }
+          component={itemId ? Link : undefined}
+          to={itemId ? `/items/${itemId}` : undefined}
           sx={{ paddingY: 1 }}
         >
           <ListItemIcon>{getIcon(notification.type)}</ListItemIcon>
@@ -1322,6 +1406,44 @@ export const NotificationProvider = ({ children }) => {
 export default NotificationContext;
 
 ================
+File: client/src/context/ThemeContext.js
+================
+import React, { createContext, useState, useContext, useEffect } from "react";
+
+const ThemeContext = createContext();
+
+export const useTheme = () => useContext(ThemeContext);
+
+export const ThemeProvider = ({ children }) => {
+  // Get initial theme from localStorage or default to light mode
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("darkMode");
+    return savedTheme ? JSON.parse(savedTheme) : false;
+  });
+
+  // Update localStorage when theme changes
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  // Toggle theme function
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
+
+  const value = {
+    darkMode,
+    toggleDarkMode,
+  };
+
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
+};
+
+export default ThemeContext;
+
+================
 File: client/src/index.css
 ================
 body {
@@ -1368,7 +1490,7 @@ axios.interceptors.response.use(
     console.log("Global error interceptor:", error);
     // You can handle global errors here if needed
     return Promise.reject(error);
-  },
+  }
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -1379,7 +1501,7 @@ root.render(
         <App />
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -2007,18 +2129,35 @@ const ItemDetails = () => {
     );
   }
 
-  // Check if user is the owner
-  const isOwner = item && user && item.reportedBy._id === user.id;
-
-  // Check if user can claim (not owner, item available, and not already claimed)
-  const canClaim =
+  // Improved check for item ownership that handles different data structures
+  const isOwner =
     item &&
     user &&
-    item.reportedBy._id !== user.id &&
-    item.status === "available";
+    // If reportedBy is a populated object with _id
+    ((item.reportedBy._id && item.reportedBy._id.toString() === user.id) ||
+      // If reportedBy is just the ID string
+      (typeof item.reportedBy === "string" && item.reportedBy === user.id) ||
+      // If reportedBy is an ObjectId directly
+      (item.reportedBy.toString && item.reportedBy.toString() === user.id));
+
+  // Check if user can claim (not owner, item available, and not already claimed)
+  const canClaim = item && user && !isOwner && item.status === "available";
 
   // Check if user can process a claim
   const canProcessClaim = item && isOwner && item.status === "pending";
+
+  // For debugging - add this near the top of your returned JSX
+  console.log({
+    itemId: id,
+    reportedBy: item.reportedBy,
+    reportedById: item.reportedBy._id
+      ? item.reportedBy._id.toString()
+      : item.reportedBy,
+    userId: user.id,
+    isOwner,
+    itemStatus: item.status,
+    canProcessClaim,
+  });
 
   // Handle item deletion
   const handleDelete = async () => {
@@ -2057,7 +2196,7 @@ const ItemDetails = () => {
     try {
       await processClaim(id, approve);
       setSuccess(
-        approve ? "Claim approved successfully" : "Claim rejected successfully",
+        approve ? "Claim approved successfully" : "Claim rejected successfully"
       );
       setProcessDialogOpen(false);
       // Update local item state
@@ -2126,8 +2265,8 @@ const ItemDetails = () => {
                     item.status === "available"
                       ? "success"
                       : item.status === "claimed"
-                        ? "secondary"
-                        : "warning"
+                      ? "secondary"
+                      : "warning"
                   }
                   size="small"
                 />
@@ -2475,6 +2614,7 @@ File: client/src/pages/Notifications.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotifications } from "../context/NotificationContext";
+import { useTheme } from "../context/ThemeContext";
 import NotificationItem from "../components/notifications/NotificationItem";
 import {
   Container,
@@ -2487,18 +2627,18 @@ import {
   Tabs,
   Tab,
   CircularProgress,
-  Switch,
-  FormControlLabel,
+  useTheme as useMuiTheme,
 } from "@mui/material";
-import { ArrowBack, MarkEmailRead, DarkMode } from "@mui/icons-material";
+import { ArrowBack, MarkEmailRead } from "@mui/icons-material";
 
 const Notifications = () => {
   const navigate = useNavigate();
   const { notifications, loading, getNotifications, markAllAsRead } =
     useNotifications();
+  const { darkMode } = useTheme();
+  const muiTheme = useMuiTheme();
 
   const [activeTab, setActiveTab] = useState(0);
-  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     getNotifications();
@@ -2510,10 +2650,6 @@ const Notifications = () => {
 
   const handleMarkAllAsRead = () => {
     markAllAsRead();
-  };
-
-  const handleToggleDarkMode = () => {
-    setDarkMode(!darkMode);
   };
 
   // Filter notifications based on active tab
@@ -2538,8 +2674,6 @@ const Notifications = () => {
         sx={{
           p: 3,
           mt: 2,
-          bgcolor: darkMode ? "#333" : "background.paper",
-          color: darkMode ? "white" : "text.primary",
         }}
       >
         <Box
@@ -2554,7 +2688,7 @@ const Notifications = () => {
             <Button
               startIcon={<ArrowBack />}
               onClick={() => navigate("/")}
-              sx={{ mr: 2, color: darkMode ? "white" : "inherit" }}
+              sx={{ mr: 2 }}
             >
               Back
             </Button>
@@ -2565,23 +2699,10 @@ const Notifications = () => {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={darkMode}
-                  onChange={handleToggleDarkMode}
-                  color="default"
-                />
-              }
-              label={<DarkMode />}
-              labelPlacement="start"
-            />
-
             <Button
               variant="text"
               startIcon={<MarkEmailRead />}
               onClick={handleMarkAllAsRead}
-              sx={{ color: darkMode ? "white" : "inherit" }}
             >
               Mark All as Read
             </Button>
@@ -2595,8 +2716,6 @@ const Notifications = () => {
             borderBottom: 1,
             borderColor: "divider",
             mb: 2,
-            "& .MuiTab-root": { color: darkMode ? "#ccc" : "inherit" },
-            "& .Mui-selected": { color: darkMode ? "white" : "primary.main" },
           }}
         >
           <Tab label="All" />
@@ -2607,12 +2726,11 @@ const Notifications = () => {
 
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-            <CircularProgress color={darkMode ? "inherit" : "primary"} />
+            <CircularProgress />
           </Box>
         ) : (
           <List
             sx={{
-              bgcolor: darkMode ? "#444" : "background.paper",
               borderRadius: 1,
             }}
           >
@@ -2625,10 +2743,7 @@ const Notifications = () => {
               ))
             ) : (
               <Box sx={{ p: 4, textAlign: "center" }}>
-                <Typography
-                  variant="body1"
-                  color={darkMode ? "#ccc" : "text.secondary"}
-                >
+                <Typography variant="body1" color="text.secondary">
                   No notifications found.
                 </Typography>
               </Box>
