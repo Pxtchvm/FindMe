@@ -37,7 +37,8 @@ You need to add the following files to the `public` directory:
 - `logo512.png` - App logo (512x512)
 
 You can generate these files using online tools like:
-- [Favicon.io](https://favicon.io/) 
+
+- [Favicon.io](https://favicon.io/)
 - [Canva](https://www.canva.com/)
 - [RealFaviconGenerator](https://realfavicongenerator.net/)
 

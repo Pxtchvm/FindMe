@@ -26,6 +26,7 @@ FindMe is a comprehensive solution for managing lost and found items on school c
 ## 🚀 Technology Stack
 
 ### Backend
+
 - **Node.js & Express:** Fast, unopinionated server framework
 - **MongoDB:** Flexible NoSQL database
 - **Mongoose:** Elegant MongoDB object modeling
@@ -33,6 +34,7 @@ FindMe is a comprehensive solution for managing lost and found items on school c
 - **Bcrypt:** Password hashing for enhanced security
 
 ### Frontend
+
 - **React:** Component-based UI library
 - **React Router:** Client-side routing
 - **Material UI:** Modern, responsive component library
@@ -69,15 +71,19 @@ npm run dev
 ## 📱 App Screenshots
 
 ### Login Page
+
 ![Login Page](https://via.placeholder.com/600x300?text=Login+Page)
 
 ### Dashboard
+
 ![Dashboard](https://via.placeholder.com/600x300?text=Dashboard)
 
 ### Report Item Form
+
 ![Report Item](https://via.placeholder.com/600x300?text=Report+Item+Form)
 
 ### Item Details
+
 ![Item Details](https://via.placeholder.com/600x300?text=Item+Details)
 
 ## 📊 Project Structure
