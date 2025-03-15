@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -9,114 +10,173 @@ import {
   Box,
   Button,
   Grid,
+  Divider,
 } from "@mui/material";
-import { LocationOn, CalendarToday, Category } from "@mui/icons-material";
+import {
+  LocationOn,
+  CalendarToday,
+  Category,
+  Person,
+} from "@mui/icons-material";
 
-// Default image for items without photos
-const DEFAULT_IMAGE = "https://placehold.co/150?text=No+Image";
+// Constants
+const STATUS_COLORS = {
+  available: "success",
+  claimed: "secondary",
+  pending: "warning",
+};
 
 const ItemCard = ({ item }) => {
   const navigate = useNavigate();
 
+  if (!item) return null;
+
+  const {
+    _id,
+    category,
+    description,
+    date,
+    location,
+    status,
+    type,
+    photoUrl,
+    reportedBy,
+  } = item;
+
   // Format date
   const formatDate = (dateString) => {
+    if (!dateString) return "Unknown date";
     const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Get status chip color
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "available":
-        return "success";
-      case "claimed":
-        return "secondary";
-      case "pending":
-        return "warning";
-      default:
-        return "default";
-    }
-  };
-
   return (
-    <Card sx={{ mb: 2, position: "relative", overflow: "visible" }}>
-      <Grid container>
-        <Grid item xs={12} md={3}>
-          <CardMedia
-            component="img"
-            height="140"
-            image={item.photoUrl || DEFAULT_IMAGE}
-            alt={item.description}
-            sx={{ objectFit: "cover" }}
+    <Card
+      sx={{
+        mb: 3,
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        overflow: "hidden",
+        transition: "box-shadow 0.3s",
+        "&:hover": { boxShadow: 6 },
+      }}
+    >
+      {/* Image Section */}
+      <Box
+        sx={{
+          position: "relative",
+          width: { xs: "100%", md: "30%" },
+          minWidth: { md: "250px" },
+          background: "#f5f5f5",
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={photoUrl || "/placeholder-image.jpg"}
+          alt={description}
+          sx={{
+            height: { xs: "200px", md: "100%" },
+            objectFit: "cover",
+            display: "block",
+          }}
+          onError={(e) => {
+            e.target.src = "https://placehold.co/400x300?text=No+Image";
+          }}
+        />
+
+        {/* Status & Type Indicator Overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "space-between",
+            p: 1,
+          }}
+        >
+          <Chip
+            size="small"
+            color={type === "lost" ? "error" : "info"}
+            label={type === "lost" ? "Lost Item" : "Found Item"}
+            icon={<Category fontSize="small" />}
           />
-        </Grid>
 
-        <Grid item xs={12} md={9}>
-          <CardContent>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-              }}
-            >
-              <Box>
-                <Typography variant="h6" gutterBottom>
-                  {item.category}
+          <Chip
+            size="small"
+            color={STATUS_COLORS[status] || "default"}
+            label={status.charAt(0).toUpperCase() + status.slice(1)}
+          />
+        </Box>
+      </Box>
+
+      {/* Content Section */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          width: { xs: "100%", md: "70%" },
+        }}
+      >
+        <CardContent sx={{ flex: "1 0 auto", pb: 1 }}>
+          <Typography variant="h6" gutterBottom>
+            {category}
+          </Typography>
+
+          <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
+            {description}
+          </Typography>
+
+          <Divider sx={{ mb: 2 }} />
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <LocationOn fontSize="small" color="primary" sx={{ mr: 1 }} />
+                <Typography variant="body2" color="text.secondary">
+                  {location}
                 </Typography>
-
-                <Typography variant="body1" sx={{ mb: 1.5 }}>
-                  {item.description}
-                </Typography>
-
-                <Box
-                  sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 1.5 }}
-                >
-                  <Chip
-                    icon={<LocationOn fontSize="small" />}
-                    label={item.location}
-                    size="small"
-                    variant="outlined"
-                  />
-
-                  <Chip
-                    icon={<CalendarToday fontSize="small" />}
-                    label={formatDate(item.date)}
-                    size="small"
-                    variant="outlined"
-                  />
-
-                  <Chip
-                    icon={<Category fontSize="small" />}
-                    label={item.type === "lost" ? "Lost Item" : "Found Item"}
-                    size="small"
-                    variant="outlined"
-                    color={item.type === "lost" ? "error" : "info"}
-                  />
-                </Box>
               </Box>
+            </Grid>
 
-              <Chip
-                label={
-                  item.status.charAt(0).toUpperCase() + item.status.slice(1)
-                }
-                color={getStatusColor(item.status)}
-                sx={{ textTransform: "capitalize" }}
-              />
-            </Box>
+            <Grid item xs={12} sm={6}>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <CalendarToday
+                  fontSize="small"
+                  color="primary"
+                  sx={{ mr: 1 }}
+                />
+                <Typography variant="body2" color="text.secondary">
+                  {formatDate(date)}
+                </Typography>
+              </Box>
+            </Grid>
 
-            <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
-              <Button
-                variant="contained"
-                size="small"
-                onClick={() => navigate(`/items/${item._id}`)}
-              >
-                View Details
-              </Button>
-            </Box>
-          </CardContent>
-        </Grid>
-      </Grid>
+            {reportedBy && (
+              <Grid item xs={12}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Person fontSize="small" color="primary" sx={{ mr: 1 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Reported by: {reportedBy.firstName} {reportedBy.lastName}
+                  </Typography>
+                </Box>
+              </Grid>
+            )}
+          </Grid>
+        </CardContent>
+
+        <CardActions sx={{ px: 2, pb: 2, pt: 0, justifyContent: "flex-end" }}>
+          <Button
+            variant="contained"
+            size="medium"
+            onClick={() => navigate(`/items/${_id}`)}
+          >
+            View Details
+          </Button>
+        </CardActions>
+      </Box>
     </Card>
   );
 };
