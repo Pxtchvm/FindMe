@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotifications } from "../../context/NotificationContext";
+import { useTheme } from "../../context/ThemeContext";
 import {
   AppBar,
   Toolbar,
@@ -13,17 +14,24 @@ import {
   MenuItem,
   Avatar,
   Box,
+  Switch,
+  Tooltip,
+  useTheme as useMuiTheme,
 } from "@mui/material";
 import {
   Notifications as NotificationsIcon,
   AccountCircle,
   ExitToApp,
   Add as AddIcon,
+  DarkMode as DarkModeIcon,
+  LightMode as LightModeIcon,
 } from "@mui/icons-material";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { unreadCount, getNotifications } = useNotifications();
+  const { darkMode, toggleDarkMode } = useTheme();
+  const muiTheme = useMuiTheme();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -54,7 +62,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Toolbar>
         <Typography
           variant="h6"
@@ -69,6 +77,26 @@ const Navbar = () => {
         >
           Find<span style={{ color: "#ff9800" }}>Me</span>
         </Typography>
+
+        {/* Dark Mode Toggle */}
+        <Tooltip
+          title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", mr: 2 }}>
+            <LightModeIcon
+              sx={{ color: darkMode ? "gray" : "inherit", mr: 0.5 }}
+            />
+            <Switch
+              checked={darkMode}
+              onChange={toggleDarkMode}
+              color="default"
+              size="small"
+            />
+            <DarkModeIcon
+              sx={{ color: darkMode ? "inherit" : "gray", ml: 0.5 }}
+            />
+          </Box>
+        </Tooltip>
 
         {user ? (
           <Box sx={{ display: "flex", alignItems: "center" }}>

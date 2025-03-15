@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotifications } from "../context/NotificationContext";
+import { useTheme } from "../context/ThemeContext";
 import NotificationItem from "../components/notifications/NotificationItem";
 import {
   Container,
@@ -13,18 +14,18 @@ import {
   Tabs,
   Tab,
   CircularProgress,
-  Switch,
-  FormControlLabel,
+  useTheme as useMuiTheme,
 } from "@mui/material";
-import { ArrowBack, MarkEmailRead, DarkMode } from "@mui/icons-material";
+import { ArrowBack, MarkEmailRead } from "@mui/icons-material";
 
 const Notifications = () => {
   const navigate = useNavigate();
   const { notifications, loading, getNotifications, markAllAsRead } =
     useNotifications();
+  const { darkMode } = useTheme();
+  const muiTheme = useMuiTheme();
 
   const [activeTab, setActiveTab] = useState(0);
-  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     getNotifications();
@@ -36,10 +37,6 @@ const Notifications = () => {
 
   const handleMarkAllAsRead = () => {
     markAllAsRead();
-  };
-
-  const handleToggleDarkMode = () => {
-    setDarkMode(!darkMode);
   };
 
   // Filter notifications based on active tab
@@ -64,8 +61,6 @@ const Notifications = () => {
         sx={{
           p: 3,
           mt: 2,
-          bgcolor: darkMode ? "#333" : "background.paper",
-          color: darkMode ? "white" : "text.primary",
         }}
       >
         <Box
@@ -80,7 +75,7 @@ const Notifications = () => {
             <Button
               startIcon={<ArrowBack />}
               onClick={() => navigate("/")}
-              sx={{ mr: 2, color: darkMode ? "white" : "inherit" }}
+              sx={{ mr: 2 }}
             >
               Back
             </Button>
@@ -91,23 +86,10 @@ const Notifications = () => {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={darkMode}
-                  onChange={handleToggleDarkMode}
-                  color="default"
-                />
-              }
-              label={<DarkMode />}
-              labelPlacement="start"
-            />
-
             <Button
               variant="text"
               startIcon={<MarkEmailRead />}
               onClick={handleMarkAllAsRead}
-              sx={{ color: darkMode ? "white" : "inherit" }}
             >
               Mark All as Read
             </Button>
@@ -121,8 +103,6 @@ const Notifications = () => {
             borderBottom: 1,
             borderColor: "divider",
             mb: 2,
-            "& .MuiTab-root": { color: darkMode ? "#ccc" : "inherit" },
-            "& .Mui-selected": { color: darkMode ? "white" : "primary.main" },
           }}
         >
           <Tab label="All" />
@@ -133,12 +113,11 @@ const Notifications = () => {
 
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-            <CircularProgress color={darkMode ? "inherit" : "primary"} />
+            <CircularProgress />
           </Box>
         ) : (
           <List
             sx={{
-              bgcolor: darkMode ? "#444" : "background.paper",
               borderRadius: 1,
             }}
           >
@@ -151,10 +130,7 @@ const Notifications = () => {
               ))
             ) : (
               <Box sx={{ p: 4, textAlign: "center" }}>
-                <Typography
-                  variant="body1"
-                  color={darkMode ? "#ccc" : "text.secondary"}
-                >
+                <Typography variant="body1" color="text.secondary">
                   No notifications found.
                 </Typography>
               </Box>

@@ -13,7 +13,7 @@ axios.interceptors.response.use(
     console.log("Global error interceptor:", error);
     // You can handle global errors here if needed
     return Promise.reject(error);
-  },
+  }
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -24,7 +24,7 @@ root.render(
         <App />
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
