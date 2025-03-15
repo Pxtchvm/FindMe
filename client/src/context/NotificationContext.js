@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useCallback } from "react";
 import axios from "axios";
 
 const NotificationContext = createContext();
@@ -10,8 +10,8 @@ export const NotificationProvider = ({ children }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // Get user notifications
-  const getNotifications = async () => {
+  // Get user notifications - memoized with useCallback
+  const getNotifications = useCallback(async () => {
     setLoading(true);
     try {
       const res = await axios.get("/api/users/notifications");
@@ -19,7 +19,7 @@ export const NotificationProvider = ({ children }) => {
 
       // Count unread notifications
       const unread = res.data.filter(
-        (notification) => !notification.read,
+        (notification) => !notification.read
       ).length;
       setUnreadCount(unread);
 
@@ -30,20 +30,20 @@ export const NotificationProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []); // Empty dependency array since this doesn't depend on any props or state
 
-  // Mark notification as read
-  const markAsRead = async (id) => {
+  // Mark notification as read - also memoized
+  const markAsRead = useCallback(async (id) => {
     try {
       const res = await axios.put(`/api/users/notifications/${id}`);
 
       // Update notifications list
-      setNotifications(
-        notifications.map((notification) =>
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) =>
           notification._id === id
             ? { ...notification, read: true }
-            : notification,
-        ),
+            : notification
+        )
       );
 
       // Update unread count
@@ -54,16 +54,19 @@ export const NotificationProvider = ({ children }) => {
       console.error(`Failed to mark notification ${id} as read:`, error);
       throw error;
     }
-  };
+  }, []);
 
-  // Mark all notifications as read
-  const markAllAsRead = async () => {
+  // Mark all notifications as read - also memoized
+  const markAllAsRead = useCallback(async () => {
     try {
       const res = await axios.put("/api/users/notifications");
 
       // Update all notifications as read
-      setNotifications(
-        notifications.map((notification) => ({ ...notification, read: true })),
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) => ({
+          ...notification,
+          read: true,
+        }))
       );
 
       // Reset unread count
@@ -74,7 +77,7 @@ export const NotificationProvider = ({ children }) => {
       console.error("Failed to mark all notifications as read:", error);
       throw error;
     }
-  };
+  }, []);
 
   const value = {
     notifications,

@@ -1,0 +1,5088 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+.gitignore
+client/package.json
+client/public/index.html
+client/public/manifest.json
+client/public/robots.txt
+client/README.md
+client/src/App.js
+client/src/components/items/ItemCard.js
+client/src/components/layout/Navbar.js
+client/src/components/notifications/NotificationItem.js
+client/src/context/AuthContext.js
+client/src/context/ItemContext.js
+client/src/context/NotificationContext.js
+client/src/index.css
+client/src/index.js
+client/src/pages/Dashboard.js
+client/src/pages/ItemDetails.js
+client/src/pages/LoginPage.js
+client/src/pages/Notifications.js
+client/src/pages/Profile.js
+client/src/pages/RegisterPage.js
+client/src/pages/ReportItem.js
+client/src/reportWebVitals.js
+client/src/services/auth.service.js
+INSTALL.md
+package.json
+README.md
+server/.env.example
+server/complete-seed.js
+server/config/db.config.js
+server/controllers/auth.controller.js
+server/controllers/item.controller.js
+server/controllers/user.controller.js
+server/index.js
+server/middleware/auth.middleware.js
+server/models/item.model.js
+server/models/notification.model.js
+server/models/user.model.js
+server/package.json
+server/routes/auth.routes.js
+server/routes/item.routes.js
+server/routes/user.routes.js
+
+================================================================
+Files
+================================================================
+
+================
+File: .gitignore
+================
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files
+build/
+dist/
+coverage/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+================
+File: client/package.json
+================
+{
+  "name": "findme-app-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.12",
+    "axios": "^1.1.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.38.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:5000"
+}
+
+================
+File: client/public/index.html
+================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="FindMe - School Lost and Found Management System"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <title>FindMe | Lost and Found System</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+
+================
+File: client/public/manifest.json
+================
+{
+  "short_name": "FindMe",
+  "name": "FindMe - School Lost and Found System",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+
+================
+File: client/public/robots.txt
+================
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+================
+File: client/README.md
+================
+# FindMe App - Client
+
+This directory contains the React frontend for the FindMe Lost and Found Management System.
+
+## Directory Structure
+
+```
+client/
+├── public/            # Static files
+│   ├── favicon.ico    # App favicon
+│   ├── index.html     # HTML template
+│   ├── logo192.png    # App logo (small)
+│   ├── logo512.png    # App logo (large)
+│   ├── manifest.json  # Web app manifest
+│   └── robots.txt     # Robots configuration
+└── src/               # Source code
+    ├── components/    # Reusable UI components
+    │   ├── items/     # Item-related components
+    │   ├── layout/    # Layout components (navbar, etc.)
+    │   └── notifications/ # Notification components
+    ├── context/       # React Context for state management
+    ├── pages/         # Page components
+    ├── services/      # API services
+    ├── App.js         # Main App component
+    ├── index.js       # Entry point
+    └── reportWebVitals.js # Performance reporting
+```
+
+## Important Notes
+
+### Icons and Images
+
+You need to add the following files to the `public` directory:
+
+- `favicon.ico` - Website favicon (16x16, 32x32)
+- `logo192.png` - App logo (192x192)
+- `logo512.png` - App logo (512x512)
+
+You can generate these files using online tools like:
+
+- [Favicon.io](https://favicon.io/)
+- [Canva](https://www.canva.com/)
+- [RealFaviconGenerator](https://realfavicongenerator.net/)
+
+Or use simple placeholder icons during development.
+
+## Available Scripts
+
+In this directory, you can run:
+
+### `npm start`
+
+Runs the app in development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm test`
+
+Launches the test runner in interactive watch mode.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.
+
+================
+File: client/src/App.js
+================
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
+import { ItemProvider } from "./context/ItemContext";
+import { NotificationProvider } from "./context/NotificationContext";
+import Navbar from "./components/layout/Navbar";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import Dashboard from "./pages/Dashboard";
+import ReportItem from "./pages/ReportItem";
+import ItemDetails from "./pages/ItemDetails";
+import Notifications from "./pages/Notifications";
+import Profile from "./pages/Profile";
+import { Container, CircularProgress, Box } from "@mui/material";
+
+// Private Route Component
+const PrivateRoute = ({ element }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  return user ? element : <Navigate to="/login" />;
+};
+
+function App() {
+  const { checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  return (
+    <ItemProvider>
+      <NotificationProvider>
+        <div className="app-container">
+          <Navbar />
+          <Container sx={{ mt: 4, mb: 4 }}>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route
+                path="/"
+                element={<PrivateRoute element={<Dashboard />} />}
+              />
+              <Route
+                path="/report-item"
+                element={<PrivateRoute element={<ReportItem />} />}
+              />
+              <Route
+                path="/items/:id"
+                element={<PrivateRoute element={<ItemDetails />} />}
+              />
+              <Route
+                path="/notifications"
+                element={<PrivateRoute element={<Notifications />} />}
+              />
+              <Route
+                path="/profile"
+                element={<PrivateRoute element={<Profile />} />}
+              />
+              {/* Add more routes as needed */}
+            </Routes>
+          </Container>
+        </div>
+      </NotificationProvider>
+    </ItemProvider>
+  );
+}
+
+export default App;
+
+================
+File: client/src/components/items/ItemCard.js
+================
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Chip,
+  Box,
+  Button,
+  Grid,
+} from "@mui/material";
+import { LocationOn, CalendarToday, Category } from "@mui/icons-material";
+
+// Default image for items without photos
+const DEFAULT_IMAGE = "https://placehold.co/150?text=No+Image";
+
+const ItemCard = ({ item }) => {
+  const navigate = useNavigate();
+
+  // Format date
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Get status chip color
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "available":
+        return "success";
+      case "claimed":
+        return "secondary";
+      case "pending":
+        return "warning";
+      default:
+        return "default";
+    }
+  };
+
+  return (
+    <Card sx={{ mb: 2, position: "relative", overflow: "visible" }}>
+      <Grid container>
+        <Grid item xs={12} md={3}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={item.photoUrl || DEFAULT_IMAGE}
+            alt={item.description}
+            sx={{ objectFit: "cover" }}
+          />
+        </Grid>
+
+        <Grid item xs={12} md={9}>
+          <CardContent>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+              }}
+            >
+              <Box>
+                <Typography variant="h6" gutterBottom>
+                  {item.category}
+                </Typography>
+
+                <Typography variant="body1" sx={{ mb: 1.5 }}>
+                  {item.description}
+                </Typography>
+
+                <Box
+                  sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 1.5 }}
+                >
+                  <Chip
+                    icon={<LocationOn fontSize="small" />}
+                    label={item.location}
+                    size="small"
+                    variant="outlined"
+                  />
+
+                  <Chip
+                    icon={<CalendarToday fontSize="small" />}
+                    label={formatDate(item.date)}
+                    size="small"
+                    variant="outlined"
+                  />
+
+                  <Chip
+                    icon={<Category fontSize="small" />}
+                    label={item.type === "lost" ? "Lost Item" : "Found Item"}
+                    size="small"
+                    variant="outlined"
+                    color={item.type === "lost" ? "error" : "info"}
+                  />
+                </Box>
+              </Box>
+
+              <Chip
+                label={
+                  item.status.charAt(0).toUpperCase() + item.status.slice(1)
+                }
+                color={getStatusColor(item.status)}
+                sx={{ textTransform: "capitalize" }}
+              />
+            </Box>
+
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 1 }}>
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() => navigate(`/items/${item._id}`)}
+              >
+                View Details
+              </Button>
+            </Box>
+          </CardContent>
+        </Grid>
+      </Grid>
+    </Card>
+  );
+};
+
+export default ItemCard;
+
+================
+File: client/src/components/layout/Navbar.js
+================
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useNotifications } from "../../context/NotificationContext";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Badge,
+  Menu,
+  MenuItem,
+  Avatar,
+  Box,
+} from "@mui/material";
+import {
+  Notifications as NotificationsIcon,
+  AccountCircle,
+  ExitToApp,
+  Add as AddIcon,
+} from "@mui/icons-material";
+
+const Navbar = () => {
+  const { user, logout } = useAuth();
+  const { unreadCount, getNotifications } = useNotifications();
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      getNotifications();
+    }
+  }, [user, getNotifications]);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
+    navigate("/login");
+  };
+
+  const handleProfile = () => {
+    handleClose();
+    navigate("/profile");
+  };
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography
+          variant="h6"
+          component={Link}
+          to="/"
+          sx={{
+            flexGrow: 1,
+            textDecoration: "none",
+            color: "inherit",
+            fontWeight: "bold",
+          }}
+        >
+          Find<span style={{ color: "#ff9800" }}>Me</span>
+        </Typography>
+
+        {user ? (
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button
+              color="inherit"
+              component={Link}
+              to="/report-item"
+              startIcon={<AddIcon />}
+              sx={{ mr: 2 }}
+            >
+              Report Item
+            </Button>
+
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/notifications"
+              aria-label="notifications"
+              sx={{ mr: 1 }}
+            >
+              <Badge badgeContent={unreadCount} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+
+            <IconButton
+              onClick={handleMenu}
+              color="inherit"
+              aria-label="account menu"
+            >
+              <Avatar sx={{ width: 32, height: 32, bgcolor: "secondary.main" }}>
+                {user.firstName ? user.firstName.charAt(0) : <AccountCircle />}
+              </Avatar>
+            </IconButton>
+
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleProfile}>
+                <AccountCircle fontSize="small" sx={{ mr: 1 }} />
+                Profile
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>
+                <ExitToApp fontSize="small" sx={{ mr: 1 }} />
+                Logout
+              </MenuItem>
+            </Menu>
+          </Box>
+        ) : (
+          <Box>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
+            <Button color="inherit" component={Link} to="/register">
+              Register
+            </Button>
+          </Box>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Navbar;
+
+================
+File: client/src/components/notifications/NotificationItem.js
+================
+import React from "react";
+import { Link } from "react-router-dom";
+import { useNotifications } from "../../context/NotificationContext";
+import {
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+  Typography,
+  IconButton,
+  Box,
+  Divider,
+} from "@mui/material";
+import {
+  Info as InfoIcon,
+  CheckCircle as SuccessIcon,
+  Warning as WarningIcon,
+  MarkEmailRead as MarkReadIcon,
+} from "@mui/icons-material";
+
+const NotificationItem = ({ notification }) => {
+  const { markAsRead } = useNotifications();
+
+  // Format date
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Get icon based on notification type
+  const getIcon = (type) => {
+    switch (type) {
+      case "success":
+        return <SuccessIcon color="success" />;
+      case "warning":
+        return <WarningIcon color="warning" />;
+      case "info":
+      default:
+        return <InfoIcon color="info" />;
+    }
+  };
+
+  const handleMarkAsRead = (e) => {
+    e.stopPropagation();
+    markAsRead(notification._id);
+  };
+
+  return (
+    <>
+      <ListItem
+        alignItems="flex-start"
+        secondaryAction={
+          !notification.read && (
+            <IconButton
+              edge="end"
+              aria-label="mark as read"
+              onClick={handleMarkAsRead}
+              size="small"
+            >
+              <MarkReadIcon />
+            </IconButton>
+          )
+        }
+        sx={{
+          backgroundColor: notification.read
+            ? "inherit"
+            : "rgba(25, 118, 210, 0.08)",
+          transition: "background-color 0.3s",
+        }}
+      >
+        <ListItemButton
+          component={notification.relatedItem ? Link : undefined}
+          to={
+            notification.relatedItem
+              ? `/items/${notification.relatedItem}`
+              : undefined
+          }
+          sx={{ paddingY: 1 }}
+        >
+          <ListItemIcon>{getIcon(notification.type)}</ListItemIcon>
+
+          <ListItemText
+            primary={
+              <Typography
+                variant="subtitle1"
+                fontWeight={notification.read ? "normal" : "bold"}
+              >
+                {notification.title}
+              </Typography>
+            }
+            secondary={
+              <Box>
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                  sx={{ mt: 0.5 }}
+                >
+                  {notification.message}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ mt: 0.5, display: "block" }}
+                >
+                  {formatDate(notification.createdAt)}
+                </Typography>
+              </Box>
+            }
+          />
+        </ListItemButton>
+      </ListItem>
+      <Divider component="li" />
+    </>
+  );
+};
+
+export default NotificationItem;
+
+================
+File: client/src/context/AuthContext.js
+================
+import React, { createContext, useState, useContext, useCallback } from "react";
+import axios from "axios";
+
+const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Check if user is logged in
+  const checkAuth = useCallback(async () => {
+    setLoading(true);
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        // Configure axios header
+        setAuthToken(token);
+
+        // Get user profile
+        const res = await axios.get("/api/users/profile");
+        setUser(res.data);
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        localStorage.removeItem("token");
+        setAuthToken(null);
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
+  }, []);
+
+  // Login
+  const login = async (universityId, password) => {
+    try {
+      const res = await axios.post("/api/auth/login", {
+        universityId,
+        password,
+      });
+
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
+
+      // Set axios header
+      setAuthToken(res.data.token);
+
+      // Set user state
+      setUser(res.data.user);
+
+      return res.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error("Login failed");
+    }
+  };
+
+  // Register
+  const register = async (userData) => {
+    try {
+      const res = await axios.post("/api/auth/register", userData);
+      return res.data;
+    } catch (error) {
+      throw error.response
+        ? error.response.data
+        : new Error("Registration failed");
+    }
+  };
+
+  // Logout
+  const logout = () => {
+    // Remove token from localStorage
+    localStorage.removeItem("token");
+
+    // Remove axios header
+    setAuthToken(null);
+
+    // Clear user state
+    setUser(null);
+  };
+
+  // Update profile
+  const updateProfile = async (userData) => {
+    try {
+      const res = await axios.put("/api/users/profile", userData);
+      setUser({ ...user, ...res.data });
+      return res.data;
+    } catch (error) {
+      throw error.response
+        ? error.response.data
+        : new Error("Profile update failed");
+    }
+  };
+
+  // Set auth token for axios requests
+  const setAuthToken = (token) => {
+    if (token) {
+      axios.defaults.headers.common["x-auth-token"] = token;
+    } else {
+      delete axios.defaults.headers.common["x-auth-token"];
+    }
+  };
+
+  const value = {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    updateProfile,
+    checkAuth,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export default AuthContext;
+
+================
+File: client/src/context/ItemContext.js
+================
+import React, { createContext, useState, useContext } from "react";
+import axios from "axios";
+
+const ItemContext = createContext();
+
+export const useItems = () => useContext(ItemContext);
+
+export const ItemProvider = ({ children }) => {
+  const [items, setItems] = useState([]);
+  const [userItems, setUserItems] = useState([]);
+  const [currentItem, setCurrentItem] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Get all items
+  const getAllItems = async (filters = {}) => {
+    setLoading(true);
+    try {
+      // Build query string from filters
+      const queryParams = new URLSearchParams();
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) queryParams.append(key, value);
+      });
+
+      const res = await axios.get(`/api/items?${queryParams.toString()}`);
+      setItems(res.data);
+      return res.data;
+    } catch (error) {
+      console.error("Failed to fetch items:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get user items
+  const getUserItems = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("/api/items/user");
+      setUserItems(res.data);
+      return res.data;
+    } catch (error) {
+      console.error("Failed to fetch user items:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get item by ID
+  const getItemById = async (id) => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`/api/items/${id}`);
+      setCurrentItem(res.data);
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to fetch item with ID ${id}:`, error);
+      setCurrentItem(null);
+      throw error; // We need to throw this so the component can catch it
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Create a new item
+  const createItem = async (itemData) => {
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/items", itemData);
+
+      // Update user items list
+      setUserItems([res.data.item, ...userItems]);
+
+      return res.data;
+    } catch (error) {
+      console.error("Failed to create item:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update an item
+  const updateItem = async (id, itemData) => {
+    setLoading(true);
+    try {
+      const res = await axios.put(`/api/items/${id}`, itemData);
+
+      // Update item in lists
+      if (items.length > 0) {
+        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
+      }
+
+      if (userItems.length > 0) {
+        setUserItems(
+          userItems.map((item) => (item._id === id ? res.data.item : item)),
+        );
+      }
+
+      if (currentItem && currentItem._id === id) {
+        setCurrentItem(res.data.item);
+      }
+
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to update item with ID ${id}:`, error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Delete an item
+  const deleteItem = async (id) => {
+    setLoading(true);
+    try {
+      const res = await axios.delete(`/api/items/${id}`);
+
+      // Remove item from lists
+      if (items.length > 0) {
+        setItems(items.filter((item) => item._id !== id));
+      }
+
+      if (userItems.length > 0) {
+        setUserItems(userItems.filter((item) => item._id !== id));
+      }
+
+      if (currentItem && currentItem._id === id) {
+        setCurrentItem(null);
+      }
+
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to delete item with ID ${id}:`, error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Claim an item
+  const claimItem = async (id) => {
+    setLoading(true);
+    try {
+      const res = await axios.post(`/api/items/${id}/claim`);
+
+      // Update item in lists
+      if (items.length > 0) {
+        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
+      }
+
+      if (currentItem && currentItem._id === id) {
+        setCurrentItem(res.data.item);
+      }
+
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to claim item with ID ${id}:`, error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Process claim (approve/reject)
+  const processClaim = async (id, approve) => {
+    setLoading(true);
+    try {
+      const res = await axios.put(`/api/items/${id}/process-claim`, {
+        approve,
+      });
+
+      // Update item in lists
+      if (items.length > 0) {
+        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
+      }
+
+      if (userItems.length > 0) {
+        setUserItems(
+          userItems.map((item) => (item._id === id ? res.data.item : item)),
+        );
+      }
+
+      if (currentItem && currentItem._id === id) {
+        setCurrentItem(res.data.item);
+      }
+
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to process claim for item with ID ${id}:`, error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const value = {
+    items,
+    userItems,
+    currentItem,
+    loading,
+    getAllItems,
+    getUserItems,
+    getItemById,
+    createItem,
+    updateItem,
+    deleteItem,
+    claimItem,
+    processClaim,
+  };
+
+  return <ItemContext.Provider value={value}>{children}</ItemContext.Provider>;
+};
+
+export default ItemContext;
+
+================
+File: client/src/context/NotificationContext.js
+================
+import React, { createContext, useState, useContext } from "react";
+import axios from "axios";
+
+const NotificationContext = createContext();
+
+export const useNotifications = () => useContext(NotificationContext);
+
+export const NotificationProvider = ({ children }) => {
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  // Get user notifications
+  const getNotifications = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("/api/users/notifications");
+      setNotifications(res.data);
+
+      // Count unread notifications
+      const unread = res.data.filter(
+        (notification) => !notification.read,
+      ).length;
+      setUnreadCount(unread);
+
+      return res.data;
+    } catch (error) {
+      console.error("Failed to fetch notifications:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Mark notification as read
+  const markAsRead = async (id) => {
+    try {
+      const res = await axios.put(`/api/users/notifications/${id}`);
+
+      // Update notifications list
+      setNotifications(
+        notifications.map((notification) =>
+          notification._id === id
+            ? { ...notification, read: true }
+            : notification,
+        ),
+      );
+
+      // Update unread count
+      setUnreadCount((prev) => Math.max(0, prev - 1));
+
+      return res.data;
+    } catch (error) {
+      console.error(`Failed to mark notification ${id} as read:`, error);
+      throw error;
+    }
+  };
+
+  // Mark all notifications as read
+  const markAllAsRead = async () => {
+    try {
+      const res = await axios.put("/api/users/notifications");
+
+      // Update all notifications as read
+      setNotifications(
+        notifications.map((notification) => ({ ...notification, read: true })),
+      );
+
+      // Reset unread count
+      setUnreadCount(0);
+
+      return res.data;
+    } catch (error) {
+      console.error("Failed to mark all notifications as read:", error);
+      throw error;
+    }
+  };
+
+  const value = {
+    notifications,
+    unreadCount,
+    loading,
+    getNotifications,
+    markAsRead,
+    markAllAsRead,
+  };
+
+  return (
+    <NotificationContext.Provider value={value}>
+      {children}
+    </NotificationContext.Provider>
+  );
+};
+
+export default NotificationContext;
+
+================
+File: client/src/index.css
+================
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+================
+File: client/src/index.js
+================
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { AuthProvider } from "./context/AuthContext";
+import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.log("Global error interceptor:", error);
+    // You can handle global errors here if needed
+    return Promise.reject(error);
+  },
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+================
+File: client/src/pages/Dashboard.js
+================
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useItems } from "../context/ItemContext";
+import ItemCard from "../components/items/ItemCard";
+import {
+  Typography,
+  Box,
+  Grid,
+  TextField,
+  Button,
+  Card,
+  CardContent,
+  InputAdornment,
+  Tabs,
+  Tab,
+  CircularProgress,
+  Chip,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  IconButton,
+} from "@mui/material";
+import { Search as SearchIcon, Add as AddIcon } from "@mui/icons-material";
+
+const Dashboard = () => {
+  const { user } = useAuth();
+  const { items, userItems, loading, getAllItems, getUserItems } = useItems();
+
+  const [activeTab, setActiveTab] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState({
+    type: "",
+    category: "",
+    status: "",
+  });
+
+  useEffect(() => {
+    // Load items based on the active tab
+    if (activeTab === 0) {
+      getAllItems();
+    } else {
+      getUserItems();
+    }
+  }, [activeTab, getAllItems, getUserItems]);
+
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const handleSearch = () => {
+    getAllItems({ ...filters, search: searchTerm });
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
+  };
+
+  const handleResetFilters = () => {
+    setFilters({
+      type: "",
+      category: "",
+      status: "",
+    });
+    setSearchTerm("");
+    getAllItems();
+  };
+
+  return (
+    <Box>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Welcome, {user?.firstName}!
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Let's find what you're looking for in the Lost and Found system.
+        </Typography>
+      </Box>
+
+      <Grid container spacing={3}>
+        {/* Action Cards */}
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={4}>
+              <Card sx={{ height: "100%", bgcolor: "primary.light" }}>
+                <CardContent sx={{ textAlign: "center" }}>
+                  <Typography variant="h6" gutterBottom>
+                    Lost Something?
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    Report a lost item to help others find it for you.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    component={Link}
+                    to="/report-item"
+                    state={{ type: "lost" }}
+                    startIcon={<AddIcon />}
+                  >
+                    Report Lost Item
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={4}>
+              <Card sx={{ height: "100%", bgcolor: "secondary.light" }}>
+                <CardContent sx={{ textAlign: "center" }}>
+                  <Typography variant="h6" gutterBottom>
+                    Found Something?
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    Report a found item to help return it to its owner.
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    component={Link}
+                    to="/report-item"
+                    state={{ type: "found" }}
+                    startIcon={<AddIcon />}
+                  >
+                    Report Found Item
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Card sx={{ height: "100%", bgcolor: "info.light" }}>
+                <CardContent sx={{ textAlign: "center" }}>
+                  <Typography variant="h6" gutterBottom>
+                    Search Items
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    Looking for something specific? Use the search.
+                  </Typography>
+                  <TextField
+                    placeholder="Search items..."
+                    fullWidth
+                    size="small"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            edge="end"
+                            onClick={handleSearch}
+                            disabled={loading}
+                          >
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") {
+                        handleSearch();
+                      }
+                    }}
+                  />
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Filters Section */}
+        <Grid item xs={12}>
+          <Card sx={{ mb: 3 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Filters
+              </Typography>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={12} sm={3}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Item Type</InputLabel>
+                    <Select
+                      name="type"
+                      value={filters.type}
+                      label="Item Type"
+                      onChange={handleFilterChange}
+                    >
+                      <MenuItem value="">All Types</MenuItem>
+                      <MenuItem value="lost">Lost Items</MenuItem>
+                      <MenuItem value="found">Found Items</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={3}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Category</InputLabel>
+                    <Select
+                      name="category"
+                      value={filters.category}
+                      label="Category"
+                      onChange={handleFilterChange}
+                    >
+                      <MenuItem value="">All Categories</MenuItem>
+                      <MenuItem value="Electronics">Electronics</MenuItem>
+                      <MenuItem value="Books">Books</MenuItem>
+                      <MenuItem value="Clothing">Clothing</MenuItem>
+                      <MenuItem value="Accessories">Accessories</MenuItem>
+                      <MenuItem value="IDs">IDs</MenuItem>
+                      <MenuItem value="Others">Others</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={3}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Status</InputLabel>
+                    <Select
+                      name="status"
+                      value={filters.status}
+                      label="Status"
+                      onChange={handleFilterChange}
+                    >
+                      <MenuItem value="">All Statuses</MenuItem>
+                      <MenuItem value="available">Available</MenuItem>
+                      <MenuItem value="claimed">Claimed</MenuItem>
+                      <MenuItem value="pending">Pending</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={3}>
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <Button
+                      variant="contained"
+                      onClick={() => getAllItems(filters)}
+                    >
+                      Apply Filters
+                    </Button>
+                    <Button variant="outlined" onClick={handleResetFilters}>
+                      Reset
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+
+              {/* Display active filters as chips */}
+              {(filters.type ||
+                filters.category ||
+                filters.status ||
+                searchTerm) && (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 2 }}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mr: 1 }}
+                  >
+                    Active Filters:
+                  </Typography>
+
+                  {filters.type && (
+                    <Chip
+                      label={`Type: ${filters.type}`}
+                      size="small"
+                      onDelete={() => setFilters({ ...filters, type: "" })}
+                    />
+                  )}
+
+                  {filters.category && (
+                    <Chip
+                      label={`Category: ${filters.category}`}
+                      size="small"
+                      onDelete={() => setFilters({ ...filters, category: "" })}
+                    />
+                  )}
+
+                  {filters.status && (
+                    <Chip
+                      label={`Status: ${filters.status}`}
+                      size="small"
+                      onDelete={() => setFilters({ ...filters, status: "" })}
+                    />
+                  )}
+
+                  {searchTerm && (
+                    <Chip
+                      label={`Search: ${searchTerm}`}
+                      size="small"
+                      onDelete={() => setSearchTerm("")}
+                    />
+                  )}
+                </Box>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Tabs & Items List */}
+        <Grid item xs={12}>
+          <Tabs
+            value={activeTab}
+            onChange={handleTabChange}
+            sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}
+          >
+            <Tab label="All Items" />
+            <Tab label="My Items" />
+          </Tabs>
+
+          {loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <Box>
+              {/* Display items based on active tab */}
+              {activeTab === 0 ? (
+                items.length > 0 ? (
+                  items.map((item) => <ItemCard key={item._id} item={item} />)
+                ) : (
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    align="center"
+                    sx={{ my: 4 }}
+                  >
+                    No items found. Try adjusting your filters.
+                  </Typography>
+                )
+              ) : userItems.length > 0 ? (
+                userItems.map((item) => <ItemCard key={item._id} item={item} />)
+              ) : (
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  align="center"
+                  sx={{ my: 4 }}
+                >
+                  You haven't reported any items yet.
+                </Typography>
+              )}
+            </Box>
+          )}
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export default Dashboard;
+
+================
+File: client/src/pages/ItemDetails.js
+================
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useItems } from "../context/ItemContext";
+import { useAuth } from "../context/AuthContext";
+import {
+  Container,
+  Paper,
+  Typography,
+  Box,
+  Grid,
+  Button,
+  Chip,
+  Divider,
+  Card,
+  CardMedia,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
+import {
+  ArrowBack,
+  LocationOn,
+  CalendarToday,
+  Person,
+  Phone,
+  Delete,
+  Edit,
+  Check,
+  Close,
+} from "@mui/icons-material";
+
+const ItemDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const {
+    currentItem,
+    loading: contextLoading,
+    getItemById,
+    deleteItem,
+    claimItem,
+    processClaim,
+  } = useItems();
+
+  // Add local state to control the component rendering
+  const [localLoading, setLocalLoading] = useState(true);
+  const [item, setItem] = useState(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const [claimDialogOpen, setClaimDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [processDialogOpen, setProcessDialogOpen] = useState(false);
+  const [processAction, setProcessAction] = useState(null);
+
+  // Create a stable fetch function with useCallback
+  const fetchItemData = useCallback(async () => {
+    setLocalLoading(true);
+    try {
+      const data = await getItemById(id);
+      setItem(data);
+      setError("");
+    } catch (err) {
+      console.log("Error caught in component:", err);
+      setError("Unable to load item details. Please try again later.");
+      setItem(null);
+    } finally {
+      setLocalLoading(false);
+    }
+  }, [id, getItemById]);
+
+  // Fetch data only once when component mounts or ID changes
+  useEffect(() => {
+    fetchItemData();
+
+    // Cleanup function
+    return () => {
+      // Any cleanup needed
+    };
+  }, [fetchItemData]);
+
+  // Default image for items without photos
+  const DEFAULT_IMAGE = "https://via.placeholder.com/400x300?text=No+Image";
+
+  // Format date
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Handle loading state
+  if (localLoading || contextLoading) {
+    return (
+      <Container maxWidth="md">
+        <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
+  }
+
+  // Handle error state
+  if (error) {
+    return (
+      <Container maxWidth="md">
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {error}
+        </Alert>
+        <Box sx={{ mt: 2 }}>
+          <Button startIcon={<ArrowBack />} onClick={() => navigate("/")}>
+            Back to Dashboard
+          </Button>
+        </Box>
+      </Container>
+    );
+  }
+
+  // Handle missing item
+  if (!item) {
+    return (
+      <Container maxWidth="md">
+        <Alert severity="info" sx={{ mt: 2 }}>
+          Item not found or has been removed.
+        </Alert>
+        <Box sx={{ mt: 2 }}>
+          <Button startIcon={<ArrowBack />} onClick={() => navigate("/")}>
+            Back to Dashboard
+          </Button>
+        </Box>
+      </Container>
+    );
+  }
+
+  // Check if user is the owner
+  const isOwner = item && user && item.reportedBy._id === user.id;
+
+  // Check if user can claim (not owner, item available, and not already claimed)
+  const canClaim =
+    item &&
+    user &&
+    item.reportedBy._id !== user.id &&
+    item.status === "available";
+
+  // Check if user can process a claim
+  const canProcessClaim = item && isOwner && item.status === "pending";
+
+  // Handle item deletion
+  const handleDelete = async () => {
+    try {
+      await deleteItem(id);
+      setSuccess("Item deleted successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "Failed to delete item");
+      setDeleteDialogOpen(false);
+    }
+  };
+
+  // Handle claim request
+  const handleClaim = async () => {
+    try {
+      await claimItem(id);
+      setSuccess("Claim request submitted successfully");
+      setClaimDialogOpen(false);
+      // Update local item state
+      setItem((prevItem) => ({
+        ...prevItem,
+        status: "pending",
+        claimedBy: user.id,
+      }));
+    } catch (err) {
+      setError(err.message || "Failed to submit claim");
+      setClaimDialogOpen(false);
+    }
+  };
+
+  // Handle claim processing (approve/reject)
+  const handleProcessClaim = async (approve) => {
+    try {
+      await processClaim(id, approve);
+      setSuccess(
+        approve ? "Claim approved successfully" : "Claim rejected successfully",
+      );
+      setProcessDialogOpen(false);
+      // Update local item state
+      setItem((prevItem) => ({
+        ...prevItem,
+        status: approve ? "claimed" : "available",
+        claimedBy: approve ? prevItem.claimedBy : null,
+      }));
+    } catch (err) {
+      setError(err.message || "Failed to process claim");
+      setProcessDialogOpen(false);
+    }
+  };
+
+  return (
+    <Container maxWidth="md">
+      {error && (
+        <Alert severity="error" sx={{ mt: 2, mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" sx={{ mt: 2, mb: 2 }}>
+          {success}
+        </Alert>
+      )}
+
+      <Box sx={{ display: "flex", alignItems: "center", mb: 2, mt: 2 }}>
+        <Button startIcon={<ArrowBack />} onClick={() => navigate("/")}>
+          Back to Dashboard
+        </Button>
+      </Box>
+
+      <Paper elevation={3} sx={{ p: 3 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="300"
+                image={item.photoUrl || DEFAULT_IMAGE}
+                alt={item.description}
+                sx={{ objectFit: "cover" }}
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Box sx={{ mb: 2 }}>
+              <Typography variant="h5" gutterBottom>
+                {item.category}
+              </Typography>
+
+              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mb: 2 }}>
+                <Chip
+                  label={item.type === "lost" ? "Lost Item" : "Found Item"}
+                  color={item.type === "lost" ? "error" : "info"}
+                  size="small"
+                />
+
+                <Chip
+                  label={
+                    item.status.charAt(0).toUpperCase() + item.status.slice(1)
+                  }
+                  color={
+                    item.status === "available"
+                      ? "success"
+                      : item.status === "claimed"
+                        ? "secondary"
+                        : "warning"
+                  }
+                  size="small"
+                />
+              </Box>
+
+              <Typography variant="body1" paragraph>
+                {item.description}
+              </Typography>
+            </Box>
+
+            <Divider sx={{ my: 2 }} />
+
+            <Box sx={{ mb: 2 }}>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <LocationOn fontSize="small" sx={{ mr: 1 }} />
+                <Typography variant="body2">
+                  <strong>Location:</strong> {item.location}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <CalendarToday fontSize="small" sx={{ mr: 1 }} />
+                <Typography variant="body2">
+                  <strong>Date:</strong> {formatDate(item.date)}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                <Person fontSize="small" sx={{ mr: 1 }} />
+                <Typography variant="body2">
+                  <strong>Reported by:</strong> {item.reportedBy.firstName}{" "}
+                  {item.reportedBy.lastName}
+                </Typography>
+              </Box>
+
+              {item.contactInfo && (
+                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                  <Phone fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body2">
+                    <strong>Contact:</strong> {item.contactInfo}
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+
+            {item.notes && (
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Additional Notes:
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  {item.notes}
+                </Typography>
+              </Box>
+            )}
+
+            <Box sx={{ mt: 3, display: "flex", flexWrap: "wrap", gap: 1 }}>
+              {canClaim && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setClaimDialogOpen(true)}
+                >
+                  Claim This Item
+                </Button>
+              )}
+
+              {canProcessClaim && (
+                <>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    startIcon={<Check />}
+                    onClick={() => {
+                      setProcessAction(true);
+                      setProcessDialogOpen(true);
+                    }}
+                  >
+                    Approve Claim
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="error"
+                    startIcon={<Close />}
+                    onClick={() => {
+                      setProcessAction(false);
+                      setProcessDialogOpen(true);
+                    }}
+                  >
+                    Reject Claim
+                  </Button>
+                </>
+              )}
+
+              {isOwner && (
+                <>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<Edit />}
+                    onClick={() => navigate(`/edit-item/${id}`)}
+                  >
+                    Edit
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    startIcon={<Delete />}
+                    onClick={() => setDeleteDialogOpen(true)}
+                  >
+                    Delete
+                  </Button>
+                </>
+              )}
+            </Box>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      {/* Claim Dialog */}
+      <Dialog open={claimDialogOpen} onClose={() => setClaimDialogOpen(false)}>
+        <DialogTitle>Claim this item?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            By submitting a claim, you are stating that this item belongs to
+            you. Your claim will be reviewed by the person who reported the
+            item.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setClaimDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleClaim} color="primary" variant="contained">
+            Submit Claim
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Dialog */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
+        <DialogTitle>Delete this item?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This action cannot be undone. Are you sure you want to delete this
+            item report?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleDelete} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Process Claim Dialog */}
+      <Dialog
+        open={processDialogOpen}
+        onClose={() => setProcessDialogOpen(false)}
+      >
+        <DialogTitle>
+          {processAction ? "Approve claim?" : "Reject claim?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {processAction
+              ? "By approving this claim, you are confirming that this item has been returned to its rightful owner."
+              : "By rejecting this claim, the item will be available for others to claim."}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setProcessDialogOpen(false)}>Cancel</Button>
+          <Button
+            onClick={() => handleProcessClaim(processAction)}
+            color={processAction ? "success" : "error"}
+            variant="contained"
+          >
+            {processAction ? "Approve" : "Reject"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Container>
+  );
+};
+
+export default ItemDetails;
+
+================
+File: client/src/pages/LoginPage.js
+================
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
+import { LoginOutlined } from "@mui/icons-material";
+
+const LoginPage = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    universityId: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setError(""); // Clear error when user types
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.universityId || !formData.password) {
+      setError("Please enter both University ID and password");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await login(formData.universityId, formData.password);
+      navigate("/");
+    } catch (err) {
+      setError(err.message || "Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          minHeight: "80vh",
+          justifyContent: "center",
+        }}
+      >
+        <Paper elevation={3} sx={{ p: 4, width: "100%" }}>
+          <Box sx={{ textAlign: "center", mb: 3 }}>
+            <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
+              Find<span style={{ color: "#ff9800" }}>Me</span>
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              School Lost and Found System
+            </Typography>
+          </Box>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="University ID"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="universityId"
+              value={formData.universityId}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+
+            <TextField
+              label="Password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+              sx={{ mt: 2 }}
+              disabled={loading}
+              startIcon={
+                loading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  <LoginOutlined />
+                )
+              }
+            >
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+          </form>
+
+          <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Typography variant="body2">
+              Don't have an account?{" "}
+              <Link
+                to="/register"
+                style={{ color: "#1976d2", textDecoration: "none" }}
+              >
+                Register here
+              </Link>
+            </Typography>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
+  );
+};
+
+export default LoginPage;
+
+================
+File: client/src/pages/Notifications.js
+================
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useNotifications } from "../context/NotificationContext";
+import NotificationItem from "../components/notifications/NotificationItem";
+import {
+  Container,
+  Paper,
+  Typography,
+  Box,
+  List,
+  Divider,
+  Button,
+  Tabs,
+  Tab,
+  CircularProgress,
+  Switch,
+  FormControlLabel,
+} from "@mui/material";
+import { ArrowBack, MarkEmailRead, DarkMode } from "@mui/icons-material";
+
+const Notifications = () => {
+  const navigate = useNavigate();
+  const { notifications, loading, getNotifications, markAllAsRead } =
+    useNotifications();
+
+  const [activeTab, setActiveTab] = useState(0);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    getNotifications();
+  }, [getNotifications]);
+
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const handleMarkAllAsRead = () => {
+    markAllAsRead();
+  };
+
+  const handleToggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // Filter notifications based on active tab
+  const filteredNotifications = notifications.filter((notification) => {
+    switch (activeTab) {
+      case 1: // Unread
+        return !notification.read;
+      case 2: // Success
+        return notification.type === "success";
+      case 3: // Warnings
+        return notification.type === "warning";
+      case 0: // All
+      default:
+        return true;
+    }
+  });
+
+  return (
+    <Container maxWidth="md">
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          mt: 2,
+          bgcolor: darkMode ? "#333" : "background.paper",
+          color: darkMode ? "white" : "text.primary",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 3,
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button
+              startIcon={<ArrowBack />}
+              onClick={() => navigate("/")}
+              sx={{ mr: 2, color: darkMode ? "white" : "inherit" }}
+            >
+              Back
+            </Button>
+
+            <Typography variant="h5" component="h1">
+              Notifications
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={darkMode}
+                  onChange={handleToggleDarkMode}
+                  color="default"
+                />
+              }
+              label={<DarkMode />}
+              labelPlacement="start"
+            />
+
+            <Button
+              variant="text"
+              startIcon={<MarkEmailRead />}
+              onClick={handleMarkAllAsRead}
+              sx={{ color: darkMode ? "white" : "inherit" }}
+            >
+              Mark All as Read
+            </Button>
+          </Box>
+        </Box>
+
+        <Tabs
+          value={activeTab}
+          onChange={handleTabChange}
+          sx={{
+            borderBottom: 1,
+            borderColor: "divider",
+            mb: 2,
+            "& .MuiTab-root": { color: darkMode ? "#ccc" : "inherit" },
+            "& .Mui-selected": { color: darkMode ? "white" : "primary.main" },
+          }}
+        >
+          <Tab label="All" />
+          <Tab label="Unread" />
+          <Tab label="Approved" />
+          <Tab label="Warnings" />
+        </Tabs>
+
+        {loading ? (
+          <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+            <CircularProgress color={darkMode ? "inherit" : "primary"} />
+          </Box>
+        ) : (
+          <List
+            sx={{
+              bgcolor: darkMode ? "#444" : "background.paper",
+              borderRadius: 1,
+            }}
+          >
+            {filteredNotifications.length > 0 ? (
+              filteredNotifications.map((notification, index) => (
+                <React.Fragment key={notification._id}>
+                  <NotificationItem notification={notification} />
+                  {index < filteredNotifications.length - 1 && <Divider />}
+                </React.Fragment>
+              ))
+            ) : (
+              <Box sx={{ p: 4, textAlign: "center" }}>
+                <Typography
+                  variant="body1"
+                  color={darkMode ? "#ccc" : "text.secondary"}
+                >
+                  No notifications found.
+                </Typography>
+              </Box>
+            )}
+          </List>
+        )}
+      </Paper>
+    </Container>
+  );
+};
+
+export default Notifications;
+
+================
+File: client/src/pages/Profile.js
+================
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  Container,
+  Paper,
+  Typography,
+  Box,
+  TextField,
+  Button,
+  Grid,
+  Avatar,
+  Divider,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
+import { ArrowBack, Save, Person } from "@mui/icons-material";
+
+const Profile = () => {
+  const navigate = useNavigate();
+  const { user, updateProfile } = useAuth();
+
+  const [formData, setFormData] = useState({
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    email: user?.email || "",
+    mobileNumber: user?.mobileNumber || "",
+  });
+
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      await updateProfile(formData);
+      setSuccess("Profile updated successfully");
+      setEditing(false);
+    } catch (err) {
+      setError(err.message || "Failed to update profile");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container maxWidth="md">
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3, mt: 2 }}>
+        <Button
+          startIcon={<ArrowBack />}
+          onClick={() => navigate("/")}
+          sx={{ mr: 2 }}
+        >
+          Back to Dashboard
+        </Button>
+
+        <Typography variant="h5">My Profile</Typography>
+      </Box>
+
+      {error && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" sx={{ mb: 3 }}>
+          {success}
+        </Alert>
+      )}
+
+      <Paper elevation={3} sx={{ p: 4 }}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4} sx={{ textAlign: "center" }}>
+            <Avatar
+              sx={{
+                width: 120,
+                height: 120,
+                fontSize: 48,
+                bgcolor: "primary.main",
+                margin: "0 auto 16px",
+              }}
+            >
+              <Person fontSize="inherit" />
+            </Avatar>
+
+            <Typography variant="h6">
+              {user?.firstName} {user?.lastName}
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              {user?.role.charAt(0).toUpperCase() + user?.role.slice(1)}
+            </Typography>
+
+            <Box sx={{ mb: 2 }}>
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                gutterBottom
+              >
+                University ID
+              </Typography>
+              <Typography variant="body1">{user?.universityId}</Typography>
+            </Box>
+
+            <Divider sx={{ my: 2 }} />
+
+            <Box>
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                gutterBottom
+              >
+                Account Created
+              </Typography>
+              <Typography variant="body2">
+                {user?.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString()
+                  : "N/A"}
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={8}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                mb: 3,
+              }}
+            >
+              <Typography variant="h6">Personal Information</Typography>
+              {!editing && (
+                <Button variant="outlined" onClick={() => setEditing(true)}>
+                  Edit Profile
+                </Button>
+              )}
+            </Box>
+
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="First Name"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    disabled={!editing || loading}
+                    variant={editing ? "outlined" : "filled"}
+                    InputProps={{
+                      readOnly: !editing,
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Last Name"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    disabled={!editing || loading}
+                    variant={editing ? "outlined" : "filled"}
+                    InputProps={{
+                      readOnly: !editing,
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    disabled={!editing || loading}
+                    variant={editing ? "outlined" : "filled"}
+                    InputProps={{
+                      readOnly: !editing,
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Mobile Number"
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                    disabled={!editing || loading}
+                    variant={editing ? "outlined" : "filled"}
+                    InputProps={{
+                      readOnly: !editing,
+                    }}
+                  />
+                </Grid>
+              </Grid>
+
+              {editing && (
+                <Box
+                  sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}
+                >
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      setEditing(false);
+                      // Reset form to original values
+                      setFormData({
+                        firstName: user?.firstName || "",
+                        lastName: user?.lastName || "",
+                        email: user?.email || "",
+                        mobileNumber: user?.mobileNumber || "",
+                      });
+                    }}
+                    sx={{ mr: 2 }}
+                  >
+                    Cancel
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={loading}
+                    startIcon={
+                      loading ? <CircularProgress size={20} /> : <Save />
+                    }
+                  >
+                    {loading ? "Saving..." : "Save Changes"}
+                  </Button>
+                </Box>
+              )}
+            </form>
+
+            <Divider sx={{ my: 4 }} />
+
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Account Statistics
+              </Typography>
+
+              <Grid container spacing={2}>
+                <Grid item xs={6} sm={4}>
+                  <Box
+                    sx={{
+                      p: 2,
+                      textAlign: "center",
+                      bgcolor: "background.default",
+                      borderRadius: 1,
+                    }}
+                  >
+                    <Typography variant="h4" color="primary.main">
+                      {/* This would be fetched from an API in a real app */}0
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Lost Items
+                    </Typography>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={6} sm={4}>
+                  <Box
+                    sx={{
+                      p: 2,
+                      textAlign: "center",
+                      bgcolor: "background.default",
+                      borderRadius: 1,
+                    }}
+                  >
+                    <Typography variant="h4" color="secondary.main">
+                      {/* This would be fetched from an API in a real app */}0
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Found Items
+                    </Typography>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <Box
+                    sx={{
+                      p: 2,
+                      textAlign: "center",
+                      bgcolor: "background.default",
+                      borderRadius: 1,
+                    }}
+                  >
+                    <Typography variant="h4" color="success.main">
+                      {/* This would be fetched from an API in a real app */}0
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Claimed Items
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
+      </Paper>
+    </Container>
+  );
+};
+
+export default Profile;
+
+================
+File: client/src/pages/RegisterPage.js
+================
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Grid,
+  Alert,
+  CircularProgress,
+  MenuItem,
+} from "@mui/material";
+import { PersonAddAlt1 as RegisterIcon } from "@mui/icons-material";
+
+const RegisterPage = () => {
+  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    universityId: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    role: "student",
+    mobileNumber: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setError(""); // Clear error when user types
+  };
+
+  const validate = () => {
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return false;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await register({
+        universityId: formData.universityId,
+        email: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        role: formData.role,
+        mobileNumber: formData.mobileNumber,
+      });
+
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (success) {
+    return (
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 8 }}>
+          <Alert severity="success" sx={{ mb: 2 }}>
+            Registration successful! Redirecting to login page...
+          </Alert>
+        </Box>
+      </Container>
+    );
+  }
+
+  return (
+    <Container maxWidth="md">
+      <Box sx={{ my: 4 }}>
+        <Paper elevation={3} sx={{ p: 4 }}>
+          <Typography variant="h5" component="h1" align="center" gutterBottom>
+            Register for Find<span style={{ color: "#ff9800" }}>Me</span>
+          </Typography>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="First Name"
+                  variant="outlined"
+                  fullWidth
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Last Name"
+                  variant="outlined"
+                  fullWidth
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="University ID"
+                  variant="outlined"
+                  fullWidth
+                  name="universityId"
+                  value={formData.universityId}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Email"
+                  variant="outlined"
+                  fullWidth
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  select
+                  label="Role"
+                  variant="outlined"
+                  fullWidth
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                >
+                  <MenuItem value="student">Student</MenuItem>
+                  <MenuItem value="staff">Staff</MenuItem>
+                </TextField>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Mobile Number"
+                  variant="outlined"
+                  fullWidth
+                  name="mobileNumber"
+                  value={formData.mobileNumber}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  fullWidth
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Confirm Password"
+                  variant="outlined"
+                  fullWidth
+                  name="confirmPassword"
+                  type="password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  disabled={loading}
+                  required
+                />
+              </Grid>
+            </Grid>
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+              sx={{ mt: 3 }}
+              disabled={loading}
+              startIcon={
+                loading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  <RegisterIcon />
+                )
+              }
+            >
+              {loading ? "Registering..." : "Register"}
+            </Button>
+          </form>
+
+          <Box sx={{ mt: 2, textAlign: "center" }}>
+            <Typography variant="body2">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                style={{ color: "#1976d2", textDecoration: "none" }}
+              >
+                Login here
+              </Link>
+            </Typography>
+          </Box>
+        </Paper>
+      </Box>
+    </Container>
+  );
+};
+
+export default RegisterPage;
+
+================
+File: client/src/pages/ReportItem.js
+================
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useItems } from "../context/ItemContext";
+import {
+  Container,
+  Paper,
+  Typography,
+  Box,
+  Grid,
+  TextField,
+  Button,
+  MenuItem,
+  ToggleButtonGroup,
+  ToggleButton,
+  Alert,
+  Snackbar,
+  CircularProgress,
+} from "@mui/material";
+import { PhotoCamera, Save, ArrowBack } from "@mui/icons-material";
+
+const ReportItem = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { createItem } = useItems();
+
+  // Get item type from location state (if available)
+  const initialType = location.state?.type || "lost";
+
+  const [formData, setFormData] = useState({
+    category: "",
+    description: "",
+    date: new Date().toISOString().split("T")[0],
+    location: "",
+    type: initialType,
+    photoUrl: "",
+    contactInfo: "",
+    notes: "",
+  });
+
+  const [itemType, setItemType] = useState(initialType);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleTypeChange = (event, newType) => {
+    if (newType !== null) {
+      setItemType(newType);
+      setFormData({
+        ...formData,
+        type: newType,
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate form
+    if (
+      !formData.category ||
+      !formData.description ||
+      !formData.date ||
+      !formData.location
+    ) {
+      setError("Please fill in all required fields");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      await createItem(formData);
+      setSuccess(true);
+
+      // Reset form
+      setFormData({
+        category: "",
+        description: "",
+        date: new Date().toISOString().split("T")[0],
+        location: "",
+        type: itemType,
+        photoUrl: "",
+        contactInfo: "",
+        notes: "",
+      });
+
+      // Redirect after short delay
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      setError(error.message || "Failed to report item. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Container maxWidth="md">
+      <Paper elevation={3} sx={{ p: 4, mt: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+          <Button
+            startIcon={<ArrowBack />}
+            onClick={() => navigate("/")}
+            sx={{ mr: 2 }}
+          >
+            Back to Dashboard
+          </Button>
+
+          <Typography variant="h5" component="h1">
+            {itemType === "lost" ? "Report a Lost Item" : "Report a Found Item"}
+          </Typography>
+        </Box>
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {error}
+          </Alert>
+        )}
+
+        <ToggleButtonGroup
+          value={itemType}
+          exclusive
+          onChange={handleTypeChange}
+          aria-label="item type"
+          sx={{ mb: 3, width: "100%" }}
+        >
+          <ToggleButton value="lost" color="primary" sx={{ width: "50%" }}>
+            Lost Item
+          </ToggleButton>
+          <ToggleButton value="found" color="secondary" sx={{ width: "50%" }}>
+            Found Item
+          </ToggleButton>
+        </ToggleButtonGroup>
+
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                select
+                label="Category *"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                fullWidth
+                required
+              >
+                <MenuItem value="">Select a category</MenuItem>
+                <MenuItem value="Electronics">Electronics</MenuItem>
+                <MenuItem value="Books">Books</MenuItem>
+                <MenuItem value="Clothing">Clothing</MenuItem>
+                <MenuItem value="Accessories">Accessories</MenuItem>
+                <MenuItem value="IDs">IDs</MenuItem>
+                <MenuItem value="Others">Others</MenuItem>
+              </TextField>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Location *"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                fullWidth
+                required
+                placeholder="Where lost/found? (e.g., Library, Room 203)"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Date *"
+                name="date"
+                type="date"
+                value={formData.date}
+                onChange={handleChange}
+                fullWidth
+                required
+                InputLabelProps={{ shrink: true }}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Contact Information"
+                name="contactInfo"
+                value={formData.contactInfo}
+                onChange={handleChange}
+                fullWidth
+                placeholder="Phone or email for contact"
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="Photo URL"
+                name="photoUrl"
+                value={formData.photoUrl}
+                onChange={handleChange}
+                fullWidth
+                placeholder="Link to a photo of the item (if available)"
+                InputProps={{
+                  endAdornment: (
+                    <Button
+                      component="label"
+                      startIcon={<PhotoCamera />}
+                      sx={{ minWidth: "auto", ml: 1 }}
+                    >
+                      Upload
+                      <input
+                        type="file"
+                        hidden
+                        // Note: In a real implementation, you would handle file upload to a storage service
+                        // and get the URL to store in formData.photoUrl
+                      />
+                    </Button>
+                  ),
+                }}
+              />
+              <Typography variant="caption" color="text.secondary">
+                Note: Uploads not fully implemented in this demo. Please provide
+                a URL to an existing image.
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="Description *"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                fullWidth
+                required
+                multiline
+                rows={3}
+                placeholder="Describe the item in detail (color, brand, identifiable features, etc.)"
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                label="Additional Notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleChange}
+                fullWidth
+                multiline
+                rows={2}
+                placeholder="Any additional information that might help"
+              />
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}
+            >
+              <Button
+                variant="outlined"
+                onClick={() => navigate("/")}
+                sx={{ mr: 2 }}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                type="submit"
+                variant="contained"
+                color={itemType === "lost" ? "primary" : "secondary"}
+                disabled={loading}
+                startIcon={loading ? <CircularProgress size={20} /> : <Save />}
+              >
+                {loading ? "Submitting..." : "Submit Report"}
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+
+      <Snackbar
+        open={success}
+        autoHideDuration={6000}
+        onClose={() => setSuccess(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSuccess(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Item reported successfully! Redirecting to dashboard...
+        </Alert>
+      </Snackbar>
+    </Container>
+  );
+};
+
+export default ReportItem;
+
+================
+File: client/src/reportWebVitals.js
+================
+const reportWebVitals = (onPerfEntry) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+
+================
+File: client/src/services/auth.service.js
+================
+import axios from "axios";
+
+// Create axios instance with base URL and default headers
+const API = axios.create({
+  baseURL: "/api/auth", // This will use the proxy in development
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+class AuthService {
+  async login(universityId, password) {
+    try {
+      console.log("Attempting login with:", { universityId, password });
+      const response = await API.post("/login", {
+        universityId,
+        password,
+      });
+
+      console.log("Login response:", response.data);
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw (
+        error.response?.data || {
+          message: "Network error. Please check your connection.",
+        }
+      );
+    }
+  }
+
+  async register(userData) {
+    try {
+      const response = await API.post("/register", userData);
+      return response.data;
+    } catch (error) {
+      throw (
+        error.response?.data || {
+          message: "Network error. Please check your connection.",
+        }
+      );
+    }
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  }
+
+  getCurrentUser() {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  }
+
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
+  // Add an interceptor to include the token with every request
+  setAuthHeader() {
+    API.interceptors.request.use(
+      (config) => {
+        const token = this.getToken();
+        if (token) {
+          config.headers["x-auth-token"] = token;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      },
+    );
+  }
+}
+
+const authService = new AuthService();
+// Set the auth header interceptor
+authService.setAuthHeader();
+
+export default authService;
+
+================
+File: INSTALL.md
+================
+# FindMe App Installation Guide
+
+This guide will walk you through the steps to set up and run the FindMe Lost and Found Management System.
+
+## Prerequisites
+
+Before installing the application, make sure you have the following:
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [npm](https://www.npmjs.com/) (v6 or higher) or [yarn](https://yarnpkg.com/)
+- [MongoDB](https://www.mongodb.com/try/download/community) (v4.4 or higher)
+
+## Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/findme-app.git
+cd findme-app
+```
+
+## Step 2: Install Dependencies
+
+Install the root dependencies:
+
+```bash
+npm install
+```
+
+Install the server dependencies:
+
+```bash
+cd server
+npm install
+cd ..
+```
+
+Install the client dependencies:
+
+```bash
+cd client
+npm install
+cd ..
+```
+
+Alternatively, you can use the shortcut script:
+
+```bash
+npm run install-all
+```
+
+## Step 3: Configure Environment Variables
+
+1. In the `server` directory, create a `.env` file:
+
+```bash
+cd server
+cp .env.example .env
+```
+
+2. Open the `.env` file and update the values:
+
+```
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/findme
+JWT_SECRET=your_jwt_secret_key
+```
+
+Replace `your_jwt_secret_key` with a strong, random string for security.
+
+## Step 4: Set Up MongoDB
+
+1. Make sure MongoDB is running on your system. If you need to start it:
+
+```bash
+# On Windows
+net start MongoDB
+
+# On macOS/Linux (if installed via Homebrew)
+brew services start mongodb-community
+
+# On Linux (if installed via apt)
+sudo systemctl start mongod
+```
+
+2. Create a new database named `findme`:
+
+```bash
+mongo
+> use findme
+> exit
+```
+
+## Step 5: Start the Application
+
+You can start both the server and client with a single command:
+
+```bash
+npm run dev
+```
+
+Or start them separately:
+
+```bash
+# Start the server (from the root directory)
+npm run server
+
+# Start the client (from the root directory)
+npm run client
+```
+
+The server will run on http://localhost:5000, and the client will run on http://localhost:3000.
+
+## Step 6: First-time Setup
+
+1. Open http://localhost:3000 in your web browser
+2. Register a new admin account:
+   - Click on "Register" in the navigation bar
+   - Fill in the registration form
+   - Select "Admin" as the role (this option may be restricted in a production environment)
+   - Click "Register"
+3. Log in with your new account
+
+## Troubleshooting
+
+### Server won't start
+
+- Check if MongoDB is running
+- Make sure the port 5000 is not being used by another application
+- Verify your `.env` file has the correct MongoDB URI
+
+### Client won't start
+
+- Make sure you have installed all dependencies
+- Check if port 3000 is not being used by another application
+
+### Connection issues between client and server
+
+- Verify that both the client and server are running
+- Check that the proxy setting in `client/package.json` points to the correct server URL
+
+## Deployment
+
+For production deployment:
+
+1. Build the client:
+
+```bash
+cd client
+npm run build
+cd ..
+```
+
+2. Set up environment variables for production:
+
+```
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=your_production_mongodb_uri
+JWT_SECRET=your_production_jwt_secret
+```
+
+3. Deploy to your preferred hosting provider (Heroku, AWS, DigitalOcean, etc.)
+
+## Additional Resources
+
+- [MongoDB Documentation](https://docs.mongodb.com/)
+- [Express.js Documentation](https://expressjs.com/)
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Node.js Documentation](https://nodejs.org/en/docs/)
+
+================
+File: package.json
+================
+{
+  "name": "findme-app",
+  "version": "1.0.0",
+  "description": "School Lost and Found Management System",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-all": "npm install && npm run install-client && npm run install-server",
+    "build-client": "cd client && npm run build",
+    "setup-dirs": "node create-directories.js"
+  },
+  "keywords": [
+    "lost and found",
+    "school",
+    "management system",
+    "web app",
+    "findme",
+    "mapua university"
+  ],
+  "author": "Group 2 - FindMe Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
+
+================
+File: README.md
+================
+# FindMe: School Lost and Found System
+
+A modern, web-based Lost and Found Management System designed to streamline the process of reporting, tracking, and claiming lost items on campus.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="Version: 1.0.0">
+  <img src="https://img.shields.io/badge/node-v14+-yellow.svg" alt="Node: v14+">
+  <img src="https://img.shields.io/badge/MongoDB-v4.4+-green.svg" alt="MongoDB: v4.4+">
+</p>
+
+## 🎯 Overview
+
+FindMe is a comprehensive solution for managing lost and found items on school campuses. It enables students and staff to report lost items, log found items, search through existing reports, and initiate/process claims with a user-friendly interface.
+
+## ✨ Features
+
+- **User Authentication:** Secure registration and login system with role-based access control
+- **Item Reporting:** Easy-to-use forms to report lost or found items with detailed descriptions and optional photos
+- **Advanced Search:** Find items using filters for category, date, location, and status
+- **Claim Management:** Request to claim items and verify ownership through the platform
+- **Real-time Notifications:** Get alerts about matching items and claim updates
+- **Dashboard Interface:** Intuitive dashboard for both users and administrators
+- **Mobile Responsive:** Fully responsive design works on all device sizes
+
+## 🚀 Technology Stack
+
+### Backend
+
+- **Node.js & Express:** Fast, unopinionated server framework
+- **MongoDB:** Flexible NoSQL database
+- **Mongoose:** Elegant MongoDB object modeling
+- **JWT:** Secure authentication using JSON Web Tokens
+- **Bcrypt:** Password hashing for enhanced security
+
+### Frontend
+
+- **React:** Component-based UI library
+- **React Router:** Client-side routing
+- **Material UI:** Modern, responsive component library
+- **Axios:** Promise-based HTTP client
+- **Context API:** State management across components
+
+## 📋 Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- MongoDB (v4.4 or higher)
+
+## 🔧 Installation
+
+See [INSTALL.md](./INSTALL.md) for detailed installation instructions.
+
+Quick start:
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/findme-app.git
+cd findme-app
+
+# Install all dependencies
+npm run install-all
+
+# Configure environment variables
+# (Create .env file in server directory)
+
+# Start the application (both server and client)
+npm run dev
+```
+
+## 📱 App Screenshots
+
+### Login Page
+
+![Login Page](https://via.placeholder.com/600x300?text=Login+Page)
+
+### Dashboard
+
+![Dashboard](https://via.placeholder.com/600x300?text=Dashboard)
+
+### Report Item Form
+
+![Report Item](https://via.placeholder.com/600x300?text=Report+Item+Form)
+
+### Item Details
+
+![Item Details](https://via.placeholder.com/600x300?text=Item+Details)
+
+## 📊 Project Structure
+
+```
+findme-app/
+├── client/             # Frontend React application
+│   ├── public/         # Static files
+│   └── src/            # React source code
+│       ├── components/ # Reusable UI components
+│       ├── context/    # React Context for state management
+│       ├── pages/      # Page components
+│       └── services/   # API services
+├── server/             # Backend Express API
+│   ├── controllers/    # Request handlers
+│   ├── middleware/     # Express middleware
+│   ├── models/         # Mongoose models
+│   └── routes/         # API routes
+├── .gitignore          # Git ignore file
+├── package.json        # Root package.json for scripts
+└── README.md           # Project documentation
+```
+
+## 🧪 Testing
+
+```bash
+# Run backend tests
+cd server && npm test
+
+# Run frontend tests
+cd client && npm test
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature/my-new-feature`
+5. Submit a pull request
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Team
+
+- Kurt Wilson T. Rojo (Team Lead)
+- Katrina Ericka C. De Guzman
+- Tyrell John C. Del Carmen
+- Jacob O. Duldulao
+- Francine Ann M. Rosal
+
+## 🙏 Acknowledgements
+
+- [Material UI](https://mui.com/) for the amazing component library
+- [MongoDB](https://www.mongodb.com/) for the flexible database solution
+- [Express](https://expressjs.com/) for the robust backend framework
+- [React](https://reactjs.org/) for the powerful frontend library
+
+================
+File: server/.env.example
+================
+# Server configuration
+PORT=5000
+
+# MongoDB configuration
+MONGODB_URI=mongodb://localhost:27017/findme
+
+# JWT configuration (generate a secure random string for production)
+JWT_SECRET=your_jwt_secret_key
+
+# Optional settings
+# NODE_ENV=development
+# UPLOAD_PATH=./uploads
+# MAX_FILE_SIZE=5000000
+
+================
+File: server/complete-seed.js
+================
+/**
+ * Complete Seed Script for FindMe App
+ *
+ * This script creates users with correct password hashing,
+ * and also creates sample items and notifications.
+ * Run with: node complete-seed.js
+ */
+
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
+
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected for complete seeding"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
+mongoose.set("strictQuery", false); // Or true, depending on your preference
+
+// Import models
+const User = require("./models/user.model");
+const Item = require("./models/item.model");
+const Notification = require("./models/notification.model");
+
+// Sample data with fixed password
+const COMMON_PASSWORD = "password123";
+const HASHED_PASSWORD = bcrypt.hashSync(COMMON_PASSWORD, 10);
+
+// Sample users with pre-hashed passwords
+const sampleUsers = [
+  {
+    universityId: "admin123",
+    email: "admin@example.com",
+    password: HASHED_PASSWORD,
+    firstName: "Admin",
+    lastName: "User",
+    role: "admin",
+    mobileNumber: "1234567890",
+  },
+  {
+    universityId: "student001",
+    email: "student@example.com",
+    password: HASHED_PASSWORD,
+    firstName: "John",
+    lastName: "Doe",
+    role: "student",
+    mobileNumber: "0987654321",
+  },
+  {
+    universityId: "staff001",
+    email: "staff@example.com",
+    password: HASHED_PASSWORD,
+    firstName: "Jane",
+    lastName: "Smith",
+    role: "staff",
+    mobileNumber: "5556667777",
+  },
+];
+
+// Sample items (to be populated after users are created)
+let sampleItems = [];
+
+// Sample notifications (to be populated after users and items are created)
+let sampleNotifications = [];
+
+// Clear existing data
+const clearDatabase = async () => {
+  try {
+    await User.deleteMany({});
+    await Item.deleteMany({});
+    await Notification.deleteMany({});
+    console.log("Database cleared");
+  } catch (error) {
+    console.error("Error clearing database:", error);
+    process.exit(1);
+  }
+};
+
+// Seed users directly (bypass pre-save hook)
+const seedUsers = async () => {
+  try {
+    console.log("Creating users with fixed password hash...");
+
+    // Insert users directly to avoid model pre-save hook
+    const result = await User.insertMany(sampleUsers);
+
+    console.log(
+      `Created ${result.length} users with password: ${COMMON_PASSWORD}`,
+    );
+
+    // Double-check - verify we can retrieve them
+    const users = await User.find();
+    users.forEach((user) => {
+      console.log(
+        `- ${user.role}: ${user.universityId} (${user.firstName} ${user.lastName})`,
+      );
+    });
+
+    return users;
+  } catch (error) {
+    console.error("Error seeding users:", error);
+    process.exit(1);
+  }
+};
+
+// Seed items
+const seedItems = async (users) => {
+  try {
+    // Create sample items data with user references
+    sampleItems = [
+      {
+        category: "Electronics",
+        description: "Black HP laptop with blue case",
+        date: new Date("2025-02-15"),
+        location: "Library, 2nd Floor",
+        status: "available",
+        type: "found",
+        reportedBy: users[1]._id, // Student user
+        photoUrl:
+          "https://images.unsplash.com/photo-1597673030062-0a0f1a801a31?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        contactInfo: users[1].mobileNumber,
+        notes: "Found on a study table near the window",
+      },
+      {
+        category: "IDs",
+        description: "University ID Card",
+        date: new Date("2025-02-20"),
+        location: "Cafeteria",
+        status: "available",
+        type: "lost",
+        reportedBy: users[2]._id, // Staff user
+        contactInfo: users[2].mobileNumber,
+        notes: "Lost during lunch hour",
+      },
+      {
+        category: "Accessories",
+        description: "Blue backpack with math textbooks inside",
+        date: new Date("2025-02-10"),
+        location: "Room 101, Building A",
+        status: "claimed",
+        type: "found",
+        reportedBy: users[2]._id, // Staff user
+        claimedBy: users[1]._id, // Student user
+        photoUrl:
+          "https://st2.depositphotos.com/4431055/11351/i/450/depositphotos_113513424-School-Backpack-on-background.jpg",
+        contactInfo: users[2].mobileNumber,
+      },
+      {
+        category: "Books",
+        description: "Calculus textbook",
+        date: new Date("2025-02-25"),
+        location: "Math Department",
+        status: "pending",
+        type: "lost",
+        reportedBy: users[1]._id, // Student user
+        claimedBy: users[2]._id, // Staff user
+        contactInfo: users[1].email,
+      },
+    ];
+
+    const createdItems = await Item.insertMany(sampleItems);
+    console.log(`${createdItems.length} items created`);
+    return createdItems;
+  } catch (error) {
+    console.error("Error seeding items:", error);
+    process.exit(1);
+  }
+};
+
+// Seed notifications
+const seedNotifications = async (users, items) => {
+  try {
+    // Create sample notifications
+    sampleNotifications = [
+      {
+        user: users[1]._id, // Student user
+        type: "success",
+        title: "Item Claim Approved",
+        message:
+          'Your claim for "Blue backpack" has been approved. Please visit the lost and found office to collect your item.',
+        read: false,
+        relatedItem: items[2]._id,
+        createdAt: new Date("2025-02-20"),
+      },
+      {
+        user: users[2]._id, // Staff user
+        type: "info",
+        title: "New Claim Request",
+        message:
+          'Someone has requested to claim your lost item: "Calculus textbook".',
+        read: true,
+        relatedItem: items[3]._id,
+        createdAt: new Date("2025-02-26"),
+      },
+      {
+        user: users[1]._id, // Student user
+        type: "info",
+        title: "Similar Item Found",
+        message:
+          'A "University ID Card" matching your lost description has been reported.',
+        read: false,
+        relatedItem: items[1]._id,
+        createdAt: new Date("2025-02-22"),
+      },
+    ];
+
+    const createdNotifications =
+      await Notification.insertMany(sampleNotifications);
+    console.log(`${createdNotifications.length} notifications created`);
+    return createdNotifications;
+  } catch (error) {
+    console.error("Error seeding notifications:", error);
+    process.exit(1);
+  }
+};
+
+// Test password verification
+const testPasswordVerification = async () => {
+  try {
+    console.log("\nTesting password verification...");
+
+    for (const sampleUser of sampleUsers) {
+      const user = await User.findOne({
+        universityId: sampleUser.universityId,
+      });
+
+      // Test with correct password
+      const isValid = await bcrypt.compare(COMMON_PASSWORD, user.password);
+      console.log(
+        `${user.universityId}: Password verification ${isValid ? "SUCCEEDED" : "FAILED"}`,
+      );
+    }
+  } catch (error) {
+    console.error("Error testing password verification:", error);
+  }
+};
+
+// Run the complete seeding
+const runCompleteSeeding = async () => {
+  try {
+    await clearDatabase();
+    const users = await seedUsers();
+    const items = await seedItems(users);
+    await seedNotifications(users, items);
+    await testPasswordVerification();
+
+    console.log("\nComplete seeding finished successfully!");
+    console.log(
+      `You can now log in with any of the following users (password: ${COMMON_PASSWORD}):`,
+    );
+    console.log("- Admin:    admin123");
+    console.log("- Student:  student001");
+    console.log("- Staff:    staff001");
+
+    mongoose.connection.close();
+  } catch (error) {
+    console.error("Complete seeding failed:", error);
+    mongoose.connection.close();
+    process.exit(1);
+  }
+};
+
+// Execute the complete seeding
+runCompleteSeeding();
+
+================
+File: server/config/db.config.js
+================
+/**
+ * Database configuration for MongoDB
+ * This file is kept for compatibility with existing code
+ */
+
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+    process.exit(1);
+  }
+};
+
+// Export mongoose instance and connection function
+module.exports = {
+  mongoose,
+  connectDB,
+};
+
+================
+File: server/controllers/auth.controller.js
+================
+const db = require("../config/db.config");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user.model");
+const { validationResult } = require("express-validator");
+
+// Register a new user
+exports.register = async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const {
+      universityId,
+      email,
+      password,
+      firstName,
+      lastName,
+      role,
+      mobileNumber,
+    } = req.body;
+
+    // Check if user already exists
+    const existingUser = await User.findOne({
+      $or: [{ universityId }, { email }],
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // Create new user with the User model
+    const newUser = new User({
+      universityId,
+      email,
+      password, // Will be hashed by the pre-save hook in the model
+      firstName,
+      lastName,
+      role,
+      mobileNumber,
+    });
+
+    // Save user to database
+    await newUser.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("Registration error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Login user
+exports.login = async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { universityId, password } = req.body;
+
+    // Find user - add some debug logging
+    console.log(`Login attempt for universityId: ${universityId}`);
+    const user = await User.findOne({ universityId });
+
+    if (!user) {
+      console.log("User not found");
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    console.log("User found, checking password");
+
+    // Check password using the model method
+    const isMatch = await user.comparePassword(password);
+
+    if (!isMatch) {
+      console.log("Password does not match");
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    console.log("Password match successful, generating token");
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
+
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        universityId: user.universityId,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+================
+File: server/controllers/item.controller.js
+================
+const Item = require("../models/item.model");
+const Notification = require("../models/notification.model");
+const { validationResult } = require("express-validator");
+
+// Create a new item report
+exports.createItem = async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const {
+      category,
+      description,
+      date,
+      location,
+      type,
+      photoUrl,
+      contactInfo,
+      notes,
+    } = req.body;
+
+    const newItem = new Item({
+      category,
+      description,
+      date,
+      location,
+      type,
+      reportedBy: req.user.userId,
+      photoUrl,
+      contactInfo,
+      notes,
+    });
+
+    await newItem.save();
+
+    res
+      .status(201)
+      .json({ message: "Item reported successfully", item: newItem });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Get all items
+exports.getAllItems = async (req, res) => {
+  try {
+    const { type, category, status, search } = req.query;
+    const query = {};
+
+    // Apply filters if provided
+    if (type) query.type = type;
+    if (category) query.category = category;
+    if (status) query.status = status;
+
+    // Apply text search if provided
+    if (search) {
+      query.$text = { $search: search };
+    }
+
+    const items = await Item.find(query)
+      .populate("reportedBy", "firstName lastName universityId")
+      .sort({ createdAt: -1 });
+
+    res.json(items);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Get items for a specific user
+exports.getUserItems = async (req, res) => {
+  try {
+    const items = await Item.find({ reportedBy: req.user.userId }).sort({
+      createdAt: -1,
+    });
+
+    res.json(items);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Get item by ID
+exports.getItemById = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id)
+      .populate("reportedBy", "firstName lastName universityId")
+      .populate("claimedBy", "firstName lastName universityId");
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.json(item);
+  } catch (error) {
+    console.error(`Server error fetching item ${req.params.id}:`, error);
+
+    // Check if this is an invalid ObjectId error
+    if (error.kind === "ObjectId") {
+      return res.status(400).json({ message: "Invalid item ID format" });
+    }
+
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update an item
+exports.updateItem = async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const {
+      category,
+      description,
+      date,
+      location,
+      status,
+      photoUrl,
+      contactInfo,
+      notes,
+    } = req.body;
+
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    // Check if user is the owner or an admin
+    if (
+      item.reportedBy.toString() !== req.user.userId &&
+      req.user.role !== "admin"
+    ) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to update this item" });
+    }
+
+    // Update item fields if provided
+    if (category) item.category = category;
+    if (description) item.description = description;
+    if (date) item.date = date;
+    if (location) item.location = location;
+    if (status) item.status = status;
+    if (photoUrl) item.photoUrl = photoUrl;
+    if (contactInfo) item.contactInfo = contactInfo;
+    if (notes) item.notes = notes;
+
+    await item.save();
+
+    res.json({ message: "Item updated successfully", item });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Delete an item
+exports.deleteItem = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    // Check if user is the owner or an admin
+    if (
+      item.reportedBy.toString() !== req.user.userId &&
+      req.user.role !== "admin"
+    ) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to delete this item" });
+    }
+
+    await item.deleteOne();
+
+    res.json({ message: "Item deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Claim an item
+exports.claimItem = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    if (item.status !== "available") {
+      return res.status(400).json({ message: "Item not available for claim" });
+    }
+
+    // Update item status to pending
+    item.status = "pending";
+    item.claimedBy = req.user.userId;
+
+    await item.save();
+
+    // Create notification for the item owner
+    const newNotification = new Notification({
+      user: item.reportedBy,
+      type: "info",
+      title: "Item Claim Request",
+      message: `Someone has requested to claim your ${item.type === "lost" ? "found" : "lost"} item: ${item.description}.`,
+      relatedItem: item._id,
+    });
+
+    await newNotification.save();
+
+    res.json({ message: "Claim request submitted successfully", item });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Approve or reject a claim
+exports.processClaim = async (req, res) => {
+  try {
+    const { approve } = req.body;
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    // Check if user is the owner or an admin
+    if (
+      item.reportedBy.toString() !== req.user.userId &&
+      req.user.role !== "admin"
+    ) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to process this claim" });
+    }
+
+    if (item.status !== "pending") {
+      return res
+        .status(400)
+        .json({ message: "This item is not pending approval" });
+    }
+
+    // Update item status based on decision
+    item.status = approve ? "claimed" : "available";
+
+    // If rejected, reset claimedBy field
+    if (!approve) {
+      item.claimedBy = null;
+    }
+
+    await item.save();
+
+    // Create notification for the claimant
+    const newNotification = new Notification({
+      user: item.claimedBy,
+      type: approve ? "success" : "warning",
+      title: approve ? "Claim Approved" : "Claim Rejected",
+      message: approve
+        ? `Your claim for "${item.description}" has been approved. Please visit the lost and found office to collect your item.`
+        : `Your claim for "${item.description}" has been rejected.`,
+      relatedItem: item._id,
+    });
+
+    await newNotification.save();
+
+    res.json({
+      message: approve
+        ? "Claim approved successfully"
+        : "Claim rejected successfully",
+      item,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+================
+File: server/controllers/user.controller.js
+================
+const User = require("../models/user.model");
+const Notification = require("../models/notification.model");
+const { validationResult } = require("express-validator");
+
+// Get user profile
+exports.getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Update user profile
+exports.updateProfile = async (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { firstName, lastName, email, mobileNumber } = req.body;
+
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.userId,
+      { firstName, lastName, email, mobileNumber },
+      { new: true },
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Get user notifications
+exports.getNotifications = async (req, res) => {
+  try {
+    const notifications = await Notification.find({ user: req.user.userId })
+      .populate("relatedItem")
+      .sort({ createdAt: -1 });
+
+    res.json(notifications);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Mark notification as read
+exports.markNotificationAsRead = async (req, res) => {
+  try {
+    const notification = await Notification.findOneAndUpdate(
+      { _id: req.params.id, user: req.user.userId },
+      { read: true },
+      { new: true },
+    );
+
+    if (!notification) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
+
+    res.json(notification);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Mark all notifications as read
+exports.markAllNotificationsAsRead = async (req, res) => {
+  try {
+    await Notification.updateMany(
+      { user: req.user.userId, read: false },
+      { read: true },
+    );
+
+    res.json({ message: "All notifications marked as read" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+================
+File: server/index.js
+================
+const express = require("express");
+const cors = require("cors");
+const { connectDB } = require("./config/db.config");
+require("dotenv").config();
+
+// Import routes
+const authRoutes = require("./routes/auth.routes");
+const itemRoutes = require("./routes/item.routes");
+const userRoutes = require("./routes/user.routes");
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+    credentials: true,
+  }),
+);
+app.use(express.json());
+
+// Connect to MongoDB
+connectDB();
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/items", itemRoutes);
+app.use("/api/users", userRoutes);
+
+// Basic route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to FindMe API" });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`API URL: http://localhost:${PORT}`);
+});
+
+================
+File: server/middleware/auth.middleware.js
+================
+const jwt = require("jsonwebtoken");
+
+module.exports = (req, res, next) => {
+  // Get token from header
+  const token = req.header("x-auth-token");
+
+  // Check if no token
+  if (!token) {
+    return res.status(401).json({ message: "No token, authorization denied" });
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Add user info to request
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Token is not valid" });
+  }
+};
+
+================
+File: server/models/item.model.js
+================
+const mongoose = require("mongoose");
+
+const itemSchema = new mongoose.Schema({
+  category: {
+    type: String,
+    required: true,
+    enum: ["Electronics", "Books", "Clothing", "Accessories", "IDs", "Others"],
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["available", "claimed", "pending"],
+    default: "available",
+  },
+  type: {
+    type: String,
+    enum: ["lost", "found"],
+    required: true,
+  },
+  reportedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  claimedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  photoUrl: {
+    type: String,
+  },
+  contactInfo: {
+    type: String,
+  },
+  notes: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Add text index for searching
+itemSchema.index({ description: "text", location: "text", category: "text" });
+
+const Item = mongoose.model("Item", itemSchema);
+
+module.exports = Item;
+
+================
+File: server/models/notification.model.js
+================
+const mongoose = require("mongoose");
+
+const notificationSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  type: {
+    type: String,
+    enum: ["info", "success", "warning"],
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  message: {
+    type: String,
+    required: true,
+  },
+  read: {
+    type: Boolean,
+    default: false,
+  },
+  relatedItem: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Item",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Notification = mongoose.model("Notification", notificationSchema);
+
+module.exports = Notification;
+
+================
+File: server/models/user.model.js
+================
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
+const userSchema = new mongoose.Schema({
+  universityId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ["student", "staff", "admin"],
+    default: "student",
+  },
+  mobileNumber: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Hash password before saving
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Method to compare passwords
+userSchema.methods.comparePassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    console.error("Error comparing passwords:", error);
+    return false;
+  }
+};
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
+
+================
+File: server/package.json
+================
+{
+  "name": "findme-app-server",
+  "version": "1.0.0",
+  "description": "FindMe App Backend Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.9",
+    "multer": "^1.4.4",
+    "express-validator": "^6.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
+
+================
+File: server/routes/auth.routes.js
+================
+const express = require("express");
+const { check } = require("express-validator");
+const authController = require("../controllers/auth.controller");
+
+const router = express.Router();
+
+// @route   POST api/auth/register
+// @desc    Register a new user
+// @access  Public
+router.post(
+  "/register",
+  [
+    check("universityId", "University ID is required").notEmpty(),
+    check("email", "Please include a valid email").isEmail(),
+    check("password", "Password must be at least 6 characters").isLength({
+      min: 6,
+    }),
+    check("firstName", "First name is required").notEmpty(),
+    check("lastName", "Last name is required").notEmpty(),
+    check("role", "Role must be student, staff, or admin").isIn([
+      "student",
+      "staff",
+      "admin",
+    ]),
+  ],
+  authController.register,
+);
+
+// @route   POST api/auth/login
+// @desc    Login user and get token
+// @access  Public
+router.post(
+  "/login",
+  [
+    check("universityId", "University ID is required").notEmpty(),
+    check("password", "Password is required").exists(),
+  ],
+  authController.login,
+);
+
+module.exports = router;
+
+================
+File: server/routes/item.routes.js
+================
+const express = require("express");
+const { check } = require("express-validator");
+const itemController = require("../controllers/item.controller");
+const auth = require("../middleware/auth.middleware");
+
+const router = express.Router();
+
+// @route   POST api/items
+// @desc    Create a new item report
+// @access  Private
+router.post(
+  "/",
+  [
+    auth,
+    check("category", "Category is required").notEmpty(),
+    check("description", "Description is required").notEmpty(),
+    check("date", "Date is required").notEmpty(),
+    check("location", "Location is required").notEmpty(),
+    check("type", "Type must be lost or found").isIn(["lost", "found"]),
+  ],
+  itemController.createItem,
+);
+
+// @route   GET api/items
+// @desc    Get all items
+// @access  Public
+router.get("/", itemController.getAllItems);
+
+// @route   GET api/items/user
+// @desc    Get items for logged in user
+// @access  Private
+router.get("/user", auth, itemController.getUserItems);
+
+// @route   GET api/items/:id
+// @desc    Get item by ID
+// @access  Public
+router.get("/:id", itemController.getItemById);
+
+// @route   PUT api/items/:id
+// @desc    Update an item
+// @access  Private
+router.put(
+  "/:id",
+  [
+    auth,
+    check("category", "Category must be valid").optional(),
+    check("description", "Description must be valid").optional().notEmpty(),
+    check("date", "Date must be valid").optional().isDate(),
+    check("location", "Location must be valid").optional().notEmpty(),
+    check("status", "Status must be valid")
+      .optional()
+      .isIn(["available", "claimed", "pending"]),
+  ],
+  itemController.updateItem,
+);
+
+// @route   DELETE api/items/:id
+// @desc    Delete an item
+// @access  Private
+router.delete("/:id", auth, itemController.deleteItem);
+
+// @route   POST api/items/:id/claim
+// @desc    Claim an item
+// @access  Private
+router.post("/:id/claim", auth, itemController.claimItem);
+
+// @route   PUT api/items/:id/process-claim
+// @desc    Approve or reject a claim
+// @access  Private
+router.put(
+  "/:id/process-claim",
+  [auth, check("approve", "Approve field is required").isBoolean()],
+  itemController.processClaim,
+);
+
+module.exports = router;
+
+================
+File: server/routes/user.routes.js
+================
+const express = require("express");
+const { check } = require("express-validator");
+const userController = require("../controllers/user.controller");
+const auth = require("../middleware/auth.middleware");
+
+const router = express.Router();
+
+// @route   GET api/users/profile
+// @desc    Get user profile
+// @access  Private
+router.get("/profile", auth, userController.getProfile);
+
+// @route   PUT api/users/profile
+// @desc    Update user profile
+// @access  Private
+router.put(
+  "/profile",
+  [
+    auth,
+    check("firstName", "First name is required").optional().notEmpty(),
+    check("lastName", "Last name is required").optional().notEmpty(),
+    check("email", "Please include a valid email").optional().isEmail(),
+    check("mobileNumber", "Mobile number is required").optional().notEmpty(),
+  ],
+  userController.updateProfile,
+);
+
+// @route   GET api/users/notifications
+// @desc    Get user notifications
+// @access  Private
+router.get("/notifications", auth, userController.getNotifications);
+
+// @route   PUT api/users/notifications/:id
+// @desc    Mark notification as read
+// @access  Private
+router.put("/notifications/:id", auth, userController.markNotificationAsRead);
+
+// @route   PUT api/users/notifications
+// @desc    Mark all notifications as read
+// @access  Private
+router.put("/notifications", auth, userController.markAllNotificationsAsRead);
+
+module.exports = router;
+
+
+
+================================================================
+End of Codebase
+================================================================

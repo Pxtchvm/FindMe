@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useCallback } from "react";
 import axios from "axios";
 
 const ItemContext = createContext();
@@ -12,7 +12,7 @@ export const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   // Get all items
-  const getAllItems = async (filters = {}) => {
+  const getAllItems = useCallback(async (filters = {}) => {
     setLoading(true);
     try {
       // Build query string from filters
@@ -30,10 +30,10 @@ export const ItemProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Get user items
-  const getUserItems = async () => {
+  const getUserItems = useCallback(async () => {
     setLoading(true);
     try {
       const res = await axios.get("/api/items/user");
@@ -45,10 +45,10 @@ export const ItemProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Get item by ID
-  const getItemById = async (id) => {
+  const getItemById = useCallback(async (id) => {
     setLoading(true);
     try {
       const res = await axios.get(`/api/items/${id}`);
@@ -61,16 +61,16 @@ export const ItemProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Create a new item
-  const createItem = async (itemData) => {
+  const createItem = useCallback(async (itemData) => {
     setLoading(true);
     try {
       const res = await axios.post("/api/items", itemData);
 
       // Update user items list
-      setUserItems([res.data.item, ...userItems]);
+      setUserItems((prevItems) => [res.data.item, ...prevItems]);
 
       return res.data;
     } catch (error) {
@@ -79,121 +79,143 @@ export const ItemProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Update an item
-  const updateItem = async (id, itemData) => {
-    setLoading(true);
-    try {
-      const res = await axios.put(`/api/items/${id}`, itemData);
+  const updateItem = useCallback(
+    async (id, itemData) => {
+      setLoading(true);
+      try {
+        const res = await axios.put(`/api/items/${id}`, itemData);
 
-      // Update item in lists
-      if (items.length > 0) {
-        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
-      }
-
-      if (userItems.length > 0) {
-        setUserItems(
-          userItems.map((item) => (item._id === id ? res.data.item : item)),
+        // Update item in lists
+        setItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.map((item) => (item._id === id ? res.data.item : item))
+            : prevItems
         );
-      }
 
-      if (currentItem && currentItem._id === id) {
-        setCurrentItem(res.data.item);
-      }
+        setUserItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.map((item) => (item._id === id ? res.data.item : item))
+            : prevItems
+        );
 
-      return res.data;
-    } catch (error) {
-      console.error(`Failed to update item with ID ${id}:`, error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+        if (currentItem && currentItem._id === id) {
+          setCurrentItem(res.data.item);
+        }
+
+        return res.data;
+      } catch (error) {
+        console.error(`Failed to update item with ID ${id}:`, error);
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [currentItem]
+  );
 
   // Delete an item
-  const deleteItem = async (id) => {
-    setLoading(true);
-    try {
-      const res = await axios.delete(`/api/items/${id}`);
+  const deleteItem = useCallback(
+    async (id) => {
+      setLoading(true);
+      try {
+        const res = await axios.delete(`/api/items/${id}`);
 
-      // Remove item from lists
-      if (items.length > 0) {
-        setItems(items.filter((item) => item._id !== id));
+        // Remove item from lists
+        setItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.filter((item) => item._id !== id)
+            : prevItems
+        );
+
+        setUserItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.filter((item) => item._id !== id)
+            : prevItems
+        );
+
+        if (currentItem && currentItem._id === id) {
+          setCurrentItem(null);
+        }
+
+        return res.data;
+      } catch (error) {
+        console.error(`Failed to delete item with ID ${id}:`, error);
+        throw error;
+      } finally {
+        setLoading(false);
       }
-
-      if (userItems.length > 0) {
-        setUserItems(userItems.filter((item) => item._id !== id));
-      }
-
-      if (currentItem && currentItem._id === id) {
-        setCurrentItem(null);
-      }
-
-      return res.data;
-    } catch (error) {
-      console.error(`Failed to delete item with ID ${id}:`, error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [currentItem]
+  );
 
   // Claim an item
-  const claimItem = async (id) => {
-    setLoading(true);
-    try {
-      const res = await axios.post(`/api/items/${id}/claim`);
+  const claimItem = useCallback(
+    async (id) => {
+      setLoading(true);
+      try {
+        const res = await axios.post(`/api/items/${id}/claim`);
 
-      // Update item in lists
-      if (items.length > 0) {
-        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
+        // Update item in lists
+        setItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.map((item) => (item._id === id ? res.data.item : item))
+            : prevItems
+        );
+
+        if (currentItem && currentItem._id === id) {
+          setCurrentItem(res.data.item);
+        }
+
+        return res.data;
+      } catch (error) {
+        console.error(`Failed to claim item with ID ${id}:`, error);
+        throw error;
+      } finally {
+        setLoading(false);
       }
-
-      if (currentItem && currentItem._id === id) {
-        setCurrentItem(res.data.item);
-      }
-
-      return res.data;
-    } catch (error) {
-      console.error(`Failed to claim item with ID ${id}:`, error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [currentItem]
+  );
 
   // Process claim (approve/reject)
-  const processClaim = async (id, approve) => {
-    setLoading(true);
-    try {
-      const res = await axios.put(`/api/items/${id}/process-claim`, {
-        approve,
-      });
+  const processClaim = useCallback(
+    async (id, approve) => {
+      setLoading(true);
+      try {
+        const res = await axios.put(`/api/items/${id}/process-claim`, {
+          approve,
+        });
 
-      // Update item in lists
-      if (items.length > 0) {
-        setItems(items.map((item) => (item._id === id ? res.data.item : item)));
-      }
-
-      if (userItems.length > 0) {
-        setUserItems(
-          userItems.map((item) => (item._id === id ? res.data.item : item)),
+        // Update item in lists
+        setItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.map((item) => (item._id === id ? res.data.item : item))
+            : prevItems
         );
-      }
 
-      if (currentItem && currentItem._id === id) {
-        setCurrentItem(res.data.item);
-      }
+        setUserItems((prevItems) =>
+          prevItems.length > 0
+            ? prevItems.map((item) => (item._id === id ? res.data.item : item))
+            : prevItems
+        );
 
-      return res.data;
-    } catch (error) {
-      console.error(`Failed to process claim for item with ID ${id}:`, error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+        if (currentItem && currentItem._id === id) {
+          setCurrentItem(res.data.item);
+        }
+
+        return res.data;
+      } catch (error) {
+        console.error(`Failed to process claim for item with ID ${id}:`, error);
+        throw error;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [currentItem]
+  );
 
   const value = {
     items,
