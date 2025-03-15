@@ -51,6 +51,24 @@ const NotificationItem = ({ notification }) => {
     markAsRead(notification._id);
   };
 
+  // Extract the item ID correctly whether relatedItem is populated or not
+  const getItemId = () => {
+    if (!notification.relatedItem) return null;
+
+    // If relatedItem is already populated (it's an object with _id)
+    if (
+      typeof notification.relatedItem === "object" &&
+      notification.relatedItem._id
+    ) {
+      return notification.relatedItem._id;
+    }
+
+    // If relatedItem is just the ID string
+    return notification.relatedItem;
+  };
+
+  const itemId = getItemId();
+
   return (
     <>
       <ListItem
@@ -75,12 +93,8 @@ const NotificationItem = ({ notification }) => {
         }}
       >
         <ListItemButton
-          component={notification.relatedItem ? Link : undefined}
-          to={
-            notification.relatedItem
-              ? `/items/${notification.relatedItem}`
-              : undefined
-          }
+          component={itemId ? Link : undefined}
+          to={itemId ? `/items/${itemId}` : undefined}
           sx={{ paddingY: 1 }}
         >
           <ListItemIcon>{getIcon(notification.type)}</ListItemIcon>
